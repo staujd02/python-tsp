@@ -1,0 +1,22 @@
+# Ignore Log, Data, and ini files #
+####################
+*.log
+*.csv
+.env
+ssh.sh
+
+# and OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Binaries #
+############
+*.pyc
+__pycache__
+.pytest_cache
