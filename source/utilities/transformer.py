@@ -11,11 +11,19 @@ class Transformer(object):
         for (idx, header) in enumerate(self.headers):
             buckets.append(self.__createVector(idx, header))
         return buckets
+    
+    def flatten(self, toSort=False):
+        masterList = []
+        for row in self.getColumnVectors():
+            for item in row:
+                masterList.append(item)
+        return self.__sort(masterList, toSort)
+    
+    def __sort(self, masterList, toSort):
+        if toSort is True:
+            masterList.sort(key=self.sortThird)
+        return masterList
         
-    @staticmethod
-    def sortThird(val): 
-        return val[2] 
-
     def __createVector(self, columnIdx, header):
         vector = []
         self.__invert(vector, columnIdx, header)
@@ -27,3 +35,8 @@ class Transformer(object):
                 val = self.matrix[rowIdx][columnIdx]
                 if val is not None:
                     vector.append(Vector(header, self.headers[rowIdx], val))
+    
+    @staticmethod
+    def sortThird(val): 
+        return val[2] 
+

@@ -1,4 +1,4 @@
-# from source.editorPilot import EditorPilot
+from source.utilities.transformer import Transformer
 
 headers = ['A', 'B', 'C', 'D', 'E']
 matrix = [
@@ -9,3 +9,10 @@ matrix = [
     [ 50,  200,  125,   80,  None]
 ]
 
+transformer = Transformer(matrix, headers)
+
+vectors = transformer.getColumnVectors()
+
+# for vc in vectors:
+#     for vr in vc:
+#         print(str(vr))
