@@ -1,4 +1,4 @@
-from source.dataStructures import ScanEntry
+from source.dataStructures import Vector
 
 class Transformer(object):
 
@@ -26,4 +26,4 @@ class Transformer(object):
             for rowIdx in range(0, len(self.matrix)):
                 val = self.matrix[rowIdx][columnIdx]
                 if val is not None:
-                    vector.append([header, self.headers[rowIdx], val])
+                    vector.append(Vector(header, self.headers[rowIdx], val))

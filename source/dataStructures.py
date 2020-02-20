@@ -1,9 +1,7 @@
 
 class Vector(object):
 
-    start = ''
-    end = ''
-    length = 0
+    data = ['', '', 0]
 
     def __init__(self, arg1, arg2=None, arg3=None):
         if arg2 == None or arg3 == None:
@@ -12,43 +10,21 @@ class Vector(object):
             self.__createNewVector(arg1, arg2, arg3)
 
     def __cloneVector(self, vector):
-        self.__createNewVector(vector.start, vector.end, vector.length)
+        self.__createNewVector(vector[0], vector[1], vector[2])
 
     def __createNewVector(self, start, end, length):
-       self.start = start 
-       self.end = end
-       self.length = length
+        self.data[0] = start
+        self.data[1] = end
+        self.data[2] = length
 
     def isEqual(self, vector):
-        return vector.start == self.start and vector.end == self.end and vector.length == vector.length
+        return vector.data == self.data
 
-class ScanEntry(object):
+    def __getitem__(self, i):
+        return self.data[i]
 
-    def __init__(self, arg1, arg2=None):
-        if arg2 == None:
-            self.__extractEntryFromList(arg1)
-        else:
-            self.__mapArgumentsToMembers(arg1, arg2)
+    def __delitem__(self, i):
+        del self.data[i]
 
-    def __extractEntryFromList(self, list):
-        self.name = list[0]
-        self.path = list[1]
-
-    def __mapArgumentsToMembers(self, name, path):
-       self.name = name 
-       self.path = path
-
-    def toList(self):
-        return [self.name, self.path]
-    
-    def getName(self):
-        return self.name
-    
-    def getPath(self):
-        return self.path
-    
-    def setName(self, name):
-        self.name = name
-    
-    def setPath(self, path):
-        self.path = path
+    def __setitem__(self, i, value):
+        self.data[i] = value

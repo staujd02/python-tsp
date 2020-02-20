@@ -3,17 +3,21 @@ import unittest
 from source.utilities.transformer import Transformer
 from source.dataStructures import Vector
 
+
 class Transformer_test(unittest.TestCase):
 
     def test_transformer_can_sort_and_reduce(self):
         vectors = self.transformer.getColumnVectors()
         for (idx, v) in enumerate([Vector('A', 'E', 50), Vector('A', 'D', 75), Vector('A', 'B', 100), Vector('A', 'C', 250)]):
-            v.isEqual(vectors[0][idx])
-        self.assertEqual([ ['A', 'E', 50], ['A', 'D', 75], ['A', 'B', 100], ['A', 'C', 250]], vectors[0])
-        self.assertEqual([ ['B', 'A', 100], ['B', 'D', 175], ['B', 'E', 200], ['B', 'C', 300]], vectors[1])
-        self.assertEqual([ ['C', 'E', 125], ['C', 'D', 150], ['C', 'A', 250], ['C', 'B', 300]], vectors[2])
-        self.assertEqual([ ['D', 'A', 75], ['D', 'E', 80], ['D', 'C', 150], ['D', 'B', 175]], vectors[3])
-        self.assertEqual([ ['E', 'A', 50], ['E', 'D', 80], ['E', 'C', 125], ['E', 'B', 200]], vectors[4])
+            self.assertTrue(v.isEqual(vectors[0][idx]))
+        for (idx, v) in enumerate([Vector('B', 'A', 100), Vector('B', 'D', 175), Vector('B', 'E', 200), Vector('B', 'C', 300)]):
+            self.assertTrue(v.isEqual(vectors[1][idx]))
+        for (idx, v) in enumerate([Vector('C', 'E', 125), Vector('C', 'D', 150), Vector('C', 'A', 250), Vector('C', 'B', 300)]):
+            self.assertTrue(v.isEqual(vectors[2][idx]))
+        for (idx, v) in enumerate([Vector('D', 'A', 75), Vector('D', 'E', 80), Vector('D', 'C', 150), Vector('D', 'B', 175)]):
+            self.assertTrue(v.isEqual(vectors[3][idx]))
+        for (idx, v) in enumerate([Vector('E', 'A', 50), Vector('E', 'D', 80), Vector( 'E', 'C', 125), Vector('E', 'B', 200)]):
+            self.assertTrue(v.isEqual(vectors[4][idx]))
 
     def setUp(self):
         self.headers = ['A', 'B', 'C', 'D', 'E']
