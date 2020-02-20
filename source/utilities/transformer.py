@@ -6,11 +6,22 @@ class Transformer(object):
         self.matrix = matrix
         self.headers = matrixHeaders
 
-    def getColumnVectors(self):
+    def getColumnVectors(self, zero=False):
         buckets = []
         for (idx, header) in enumerate(self.headers):
             buckets.append(self.__createVector(idx, header))
+        return self.__zero(buckets, zero)
+    
+    def __zero(self, buckets, zero):
+        if zero is True:
+            self.__scaleVectors(buckets)
         return buckets
+    
+    def __scaleVectors(self, buckets):
+        for row in buckets:
+            subtraction = int(row[0][2])
+            for vector in row:
+                vector[2] = vector[2] - subtraction
     
     def flatten(self, toSort=False):
         masterList = []

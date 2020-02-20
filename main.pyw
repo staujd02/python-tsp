@@ -12,7 +12,3 @@ matrix = [
 transformer = Transformer(matrix, headers)
 
 vectors = transformer.getColumnVectors()
-
-# for vc in vectors:
-#     for vr in vc:
-#         print(str(vr))
