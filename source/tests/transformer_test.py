@@ -7,31 +7,68 @@ from source.dataStructures import Vector
 class Transformer_test(unittest.TestCase):
 
     def vectorCompare(self, v1, v2):
-        self.assertEqual(v1[0], v2[0])
-        self.assertEqual(v1[1], v2[1])
-        self.assertEqual(v1[2], v2[2])
-    
+        self.assertEqual(str(v1), str(v2))
+
+    def test_transformer_can_strip_zero_vectors(self):
+        columnVectors = self.transformer.flatten(scaleDown=True,toSort=True)
+        (zeroVectors, remaining) = self.transformer.stripZeroElements(columnVectors)
+        for (idx, v) in enumerate([Vector('A', 'E', 0), Vector('B', 'A', 0), Vector('C', 'E', 0), Vector('D', 'A', 0), Vector('E', 'A', 0)]):
+            self.vectorCompare(v, zeroVectors[idx])
+        for (idx, v) in enumerate([
+            Vector('D','E', 5),
+            Vector('A','D', 25),
+            Vector('C','D', 25),
+            Vector('E','D', 30),
+            Vector('A','B', 50),
+            Vector('B','D', 75),
+            Vector('D','C', 75),
+            Vector('E','C', 75),
+            Vector('B','E', 100),
+            Vector('D','B', 100),
+            Vector('C','A', 125),
+            Vector('E','B', 150),
+            Vector('C','B', 175),
+            Vector('A', 'C', 200),
+            Vector('B', 'C', 200)
+        ]):
+            self.vectorCompare(v, remaining[idx])
+
+    def test_transformer_can_strip_first_indices_off_of_vector_groups(self):
+        columnVectors = self.transformer.getColumnVectors(zero=True)
+        vectors = self.transformer.stripFirstElements(columnVectors)
+        for (idx, v) in enumerate([Vector('A', 'E', 0), Vector('B', 'A', 0), Vector('C', 'E', 0), Vector('D', 'A', 0), Vector('E', 'A', 0)]):
+            self.vectorCompare(v, vectors[idx])
+
     def test_transformer_can_sort_vector_lists(self):
         vectors = self.transformer.flatten(toSort=True)
         for (idx, v) in enumerate([
-            Vector('A', 'E', 50), Vector('E', 'A', 50), Vector('A', 'D', 75), Vector('D', 'A', 75), Vector('D', 'E', 80), 
-            Vector('E', 'D', 80), Vector('A', 'B', 100), Vector('B', 'A', 100), Vector('C', 'E', 125), Vector('E', 'C', 125), 
-            Vector('C', 'D', 150), Vector('D', 'C', 150), Vector('B', 'D', 175), Vector('D', 'B', 175), Vector('B', 'E', 200), 
-            Vector('E', 'B', 200), Vector('A', 'C', 250), Vector('C', 'A', 250), Vector('B', 'C', 300), Vector('C', 'B', 300)
-            ]):
+            Vector('A', 'E', 50), Vector('E', 'A', 50), Vector(
+                'A', 'D', 75), Vector('D', 'A', 75), Vector('D', 'E', 80),
+            Vector('E', 'D', 80), Vector('A', 'B', 100), Vector(
+                'B', 'A', 100), Vector('C', 'E', 125), Vector('E', 'C', 125),
+            Vector('C', 'D', 150), Vector('D', 'C', 150), Vector(
+                'B', 'D', 175), Vector('D', 'B', 175), Vector('B', 'E', 200),
+            Vector('E', 'B', 200), Vector('A', 'C', 250), Vector(
+                'C', 'A', 250), Vector('B', 'C', 300), Vector('C', 'B', 300)
+        ]):
             self.vectorCompare(v, vectors[idx])
-    
+
     def test_transformer_can_flatten(self):
         vectors = self.transformer.flatten()
         for (idx, v) in enumerate([
-            Vector('A', 'E', 50), Vector('A', 'D', 75), Vector('A', 'B', 100), Vector('A', 'C', 250),
-            Vector('B', 'A', 100), Vector('B', 'D', 175), Vector('B', 'E', 200), Vector('B', 'C', 300),
-            Vector('C', 'E', 125), Vector('C', 'D', 150), Vector('C', 'A', 250), Vector('C', 'B', 300),
-            Vector('D', 'A', 75), Vector('D', 'E', 80), Vector('D', 'C', 150), Vector('D', 'B', 175),
-            Vector('E', 'A', 50), Vector('E', 'D', 80), Vector( 'E', 'C', 125), Vector('E', 'B', 200)
-            ]):
+            Vector('A', 'E', 50), Vector('A', 'D', 75), Vector(
+                'A', 'B', 100), Vector('A', 'C', 250),
+            Vector('B', 'A', 100), Vector('B', 'D', 175), Vector(
+                'B', 'E', 200), Vector('B', 'C', 300),
+            Vector('C', 'E', 125), Vector('C', 'D', 150), Vector(
+                'C', 'A', 250), Vector('C', 'B', 300),
+            Vector('D', 'A', 75), Vector('D', 'E', 80), Vector(
+                'D', 'C', 150), Vector('D', 'B', 175),
+            Vector('E', 'A', 50), Vector('E', 'D', 80), Vector(
+                'E', 'C', 125), Vector('E', 'B', 200)
+        ]):
             self.assertTrue(v.isEqual(vectors[idx]))
-    
+
     def test_transformer_can_zero_out_columns(self):
         vectors = self.transformer.getColumnVectors(zero=True)
         for (idx, v) in enumerate([Vector('A', 'E', 0), Vector('A', 'D', 25), Vector('A', 'B', 50), Vector('A', 'C', 200)]):
@@ -42,7 +79,7 @@ class Transformer_test(unittest.TestCase):
             self.vectorCompare(v, vectors[2][idx])
         for (idx, v) in enumerate([Vector('D', 'A', 0), Vector('D', 'E', 5), Vector('D', 'C', 75), Vector('D', 'B', 100)]):
             self.vectorCompare(v, vectors[3][idx])
-        for (idx, v) in enumerate([Vector('E', 'A', 0), Vector('E', 'D', 30), Vector( 'E', 'C', 75), Vector('E', 'B', 150)]):
+        for (idx, v) in enumerate([Vector('E', 'A', 0), Vector('E', 'D', 30), Vector('E', 'C', 75), Vector('E', 'B', 150)]):
             self.vectorCompare(v, vectors[4][idx])
 
     def test_transformer_can_sort_and_reduce(self):
@@ -55,7 +92,7 @@ class Transformer_test(unittest.TestCase):
             self.assertTrue(v.isEqual(vectors[2][idx]))
         for (idx, v) in enumerate([Vector('D', 'A', 75), Vector('D', 'E', 80), Vector('D', 'C', 150), Vector('D', 'B', 175)]):
             self.assertTrue(v.isEqual(vectors[3][idx]))
-        for (idx, v) in enumerate([Vector('E', 'A', 50), Vector('E', 'D', 80), Vector( 'E', 'C', 125), Vector('E', 'B', 200)]):
+        for (idx, v) in enumerate([Vector('E', 'A', 50), Vector('E', 'D', 80), Vector('E', 'C', 125), Vector('E', 'B', 200)]):
             self.assertTrue(v.isEqual(vectors[4][idx]))
 
     def setUp(self):

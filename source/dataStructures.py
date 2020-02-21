@@ -33,3 +33,29 @@ class Vector(object):
 
     def __setitem__(self, i, value):
         self.data[i] = value
+
+class Graph(object):
+
+    def __init__(self, baseVectors):
+        self.data = list(baseVectors)
+
+    def __str__(self):
+        literal = "("
+        for vector in self.data:
+            literal += self.data[0] + "->"
+        return  literal + self.data[-1][1] + ")"
+
+    def __unicode__(self):
+        literal = u"("
+        for vector in self.data:
+            literal += self.data[0] + "->"
+        return  literal + self.data[-1][1] + ")"
+
+    def __getitem__(self, i):
+        return self.data[i]
+
+    def __delitem__(self, i):
+        del self.data[i]
+
+    def __setitem__(self, i, value):
+        self.data[i] = value

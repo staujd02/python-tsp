@@ -5,6 +5,23 @@ class Transformer(object):
     def __init__(self, matrix, matrixHeaders):
         self.matrix = matrix
         self.headers = matrixHeaders
+    
+    def stripZeroElements(self, vectors):
+        zero = []
+        i = 0
+        for vector in vectors:
+            if vector[2] == 0:
+                zero.append(vector)
+                i += 1
+            else:
+                break
+        return (zero, vectors[i:]) 
+
+    def stripFirstElements(self, zeroedBuckets):
+        l = []
+        for vectorList in zeroedBuckets:
+            l.append(vectorList[0])
+        return l
 
     def getColumnVectors(self, zero=False):
         buckets = []
@@ -23,9 +40,9 @@ class Transformer(object):
             for vector in row:
                 vector[2] = vector[2] - subtraction
     
-    def flatten(self, toSort=False):
+    def flatten(self, toSort=False, scaleDown=False):
         masterList = []
-        for row in self.getColumnVectors():
+        for row in self.getColumnVectors(zero=scaleDown):
             for item in row:
                 masterList.append(item)
         return self.__sort(masterList, toSort)

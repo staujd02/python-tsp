@@ -11,4 +11,10 @@ matrix = [
 
 transformer = Transformer(matrix, headers)
 
-vectors = transformer.getColumnVectors()
+vectorList = transformer.flatten(scaleDown=True, toSort=True)
+# vectors = transformer.stripZeroColumnVectors(vectorList)
+# columnVectors = transformer.getColumnVectors(zero=True)
+# vectors = transformer.stripFirstElements(columnVectors)
+
+for v in vectorList:
+    print(str(v))
