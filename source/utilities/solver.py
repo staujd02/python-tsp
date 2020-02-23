@@ -5,7 +5,7 @@ class Solver(object):
     def createAugmentList(self, zeroGraph, vectors):
         masterList = []
         masterList.append(vectors[0])
-        self.iterate(masterList, zeroGraph, vectors)
+        return self.iterate(masterList, zeroGraph, vectors)
 
     def iterate(self, masterList, zeroGraph, vectors):
         high = 0
@@ -17,12 +17,18 @@ class Solver(object):
             self.lookBack(masterList, vector, previousVectors, high)
         masterList.append(vectors[-1])
         return masterList
-            
+
     def lookBack(self, masterList, currentVector, previousVectors, high):
         low = currentVector[2]
+        solutionList = []
         for vector in previousVectors:
-            if not self.lookForward(masterList, vector, previousVectors, vector[2], low, high, [currentVector]):
-                break
+            if not self.lookForward(solutionList, vector, previousVectors, vector[2], 0, high, [currentVector]):
+                break # don't add to solution list here, it's been accounted
+        for vector in previousVectors:
+            if not self.lookForward(solutionList, vector, previousVectors, 0, low, high, []):
+                break # dont' add to solution list here, it's been accounted
+        # sort solution list
+        # push to master
 
     def lookForward(self, masterList, currentVector, forwardVectors, runningWeight, low, high, solution):
         if currentVector[2] + runningWeight > high:
