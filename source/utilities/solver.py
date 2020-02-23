@@ -15,16 +15,16 @@ class Solver(object):
         return self.iterate(masterList, queue, zeroGraph, vectors)
 
     def iterate(self, masterList, queue, zeroGraph, vectors):
-        queue.put((vectors[0][2], Step([vectors[0]], 1)))
         nextQueue = PriorityQueue()
-        for vector in vectors:
+        for (idx, vector) in enumerate(vectors):
             high = vector[2]
-            while queue.not_empty:
+            queue.put((high, Step([vector], idx + 1)))
+            while not queue.empty():
                 (weight, pop) = queue.get()
-                if pop.weight <= high:
+                if weight <= high:
                     masterList.append(pop.list)
                     for (i, v) in enumerate(vectors[pop.idx:]):
-                        newWeight = pop.weight + v[2]
+                        newWeight = weight + v[2]
                         if newWeight <= high:
                             l = list(pop.list)
                             l.append(v)
@@ -35,7 +35,7 @@ class Solver(object):
                             nextQueue.put((newWeight, Step(l, pop.idx + i + 1)))
                             break
                 else:
-                    nextQueue.put((pop.weight, pop))
+                    nextQueue.put((weight, pop))
             queue = nextQueue
             nextQueue = PriorityQueue()
         return masterList
