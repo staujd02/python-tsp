@@ -1,10 +1,10 @@
 import unittest
 
 from source.utilities.transformer import Transformer
+from source.utilities.graph import Graph
 from source.utilities.solver import Solver
 
 from source.dataStructures import Vector
-from source.dataStructures import Graph
 
 class Solver_test(unittest.TestCase):
 
