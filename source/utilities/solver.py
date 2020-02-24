@@ -1,11 +1,7 @@
 from queue import PriorityQueue
 
-from source.dataStructures import Vector
-    
-class Step(object):
-    def __init__(self, l, idx):
-        self.list = l
-        self.idx = idx # next index to consider
+from source.dataStructures import Vector, Step
+
 
 class Solver(object):
 
@@ -32,7 +28,8 @@ class Solver(object):
                         else:
                             l = list(pop.list)
                             l.append(v)
-                            nextQueue.put((newWeight, Step(l, pop.idx + i + 1)))
+                            nextQueue.put(
+                                (newWeight, Step(l, pop.idx + i + 1)))
                             break
                 else:
                     nextQueue.put((weight, pop))
@@ -77,5 +74,3 @@ class Solver(object):
     # def handleBreak(self, solution, masterList, low, runningWeight):
     #     if len(solution) != 1 and low > runningWeight:
     #         masterList.append(solution)
-    
-

@@ -33,3 +33,25 @@ class Vector(object):
 
     def __setitem__(self, i, value):
         self.data[i] = value
+
+class NoOpCompare(object):
+    def __eq__(self, other):
+        return 0
+    def __ne__(self, other):
+        return 0
+    def __lt__(self, other):
+        return 0
+    def __le__(self, other):
+        return 0
+    def  __gt__(self, other):
+        return 0
+    def __ge__(self, other):
+        return 0
+    
+class Step(NoOpCompare):
+    def __init__(self, l, idx):
+        self.list = l
+        self.idx = idx # next index to consider
+    
+    def __eq__(self, other):
+        pass

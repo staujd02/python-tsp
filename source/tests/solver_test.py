@@ -27,34 +27,35 @@ class Solver_test(unittest.TestCase):
     }
 
     def test_solver_can_produce_augment_list(self):
-        vectorGroups = self.solver.createAugmentList(self.zeroGraph, self.vectorList)
-        for (idx, v) in enumerate(self.solution):
-            self.vectorCompare(v, vectorGroups[idx])
+        vectorGroups = self.solver.createAugmentList(
+            self.zeroGraph, self.vectorList)
+        for (i, vectors) in enumerate(self.solution):
+            for (idx, v) in enumerate(vectors):
+                self.vectorCompare(v, vectorGroups[i][idx])
 
     solution = [
-        V['D->E'],
-        V['A->D'],
-        V['C->D'],
-        [ 
+        [V['D->E']],
+        [V['A->D']],
+        [V['C->D']],
+        [
+            V['D->E'],
             V['A->D'],
-            V['D->E'],
         ],
-        [ 
+        [V['E->D']],
+        [
+            V['D->E'],
             V['C->D'],
-            V['D->E'],
         ],
-        V['E->D'],
-        [ 
+        [
             V['E->D'],
             V['D->E'],
         ],
-        [ 
+        [
             V['A->D'],
             V['C->D'],
         ],
-        V['A->B']
+        [V['A->B']]
     ]
-
 
     def vectorCompare(self, v1, v2):
         self.assertEqual(str(v1), str(v2))
