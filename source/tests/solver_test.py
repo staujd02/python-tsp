@@ -27,8 +27,8 @@ class Solver_test(unittest.TestCase):
     }
 
     def test_solver_can_produce_augment_list(self):
-        vectorGroups = self.solver.createAugmentList(
-            self.zeroGraph, self.vectorList)
+        vectorGroups = self.solver.safe_createAugmentList(
+            self.zeroGraph, self.vectorList, 9)
         for (i, vectors) in enumerate(self.solution):
             for (idx, v) in enumerate(vectors):
                 self.vectorCompare(v, vectorGroups[i][idx])
@@ -47,8 +47,8 @@ class Solver_test(unittest.TestCase):
             V['C->D'],
         ],
         [
-            V['E->D'],
             V['D->E'],
+            V['E->D'],
         ],
         [
             V['A->D'],

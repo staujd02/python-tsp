@@ -52,6 +52,3 @@ class Step(NoOpCompare):
     def __init__(self, l, idx):
         self.list = l
         self.idx = idx # next index to consider
-    
-    def __eq__(self, other):
-        pass
