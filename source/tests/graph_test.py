@@ -26,14 +26,26 @@ class Graph_test(unittest.TestCase):
         "B->C": Vector('B', 'C', 200),
     }
     
+    def test_a_graph_can_copy_itself(self):
+        V = self.V
+        graph = Graph([V['D->E'], V['E->B'], V['B->D'], V['C->B']])
+        self.assertTrue(graph is not graph.copy())
+        self.assertEqual(str(graph), str(graph.copy()))
+    
     def test_a_graph_returns_none_when_constructed_with_duplicate_origin_vectors(self):
         V = self.V
         caughtError = False
         try:
             Graph([V['D->E'], V['E->B'], V['B->D'], V['B->C']])
-        except BranchingGraphError as error:
+        except BranchingGraphError:
             caughtError = True
         self.assertTrue(caughtError)
+    
+    def test_a_graph_can_check_for_difficult_incorrectness(self):
+        V = self.V
+        vList = [V['A->B'], V['B->A'], V['C->E'], V['D->C'], V['E->D']]
+        graph = Graph(vList)
+        self.assertEqual(graph.isValid(), False)
     
     def test_a_graph_can_check_for_incorrectness(self):
         V = self.V

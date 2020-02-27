@@ -52,3 +52,8 @@ class Step(NoOpCompare):
     def __init__(self, l, idx):
         self.list = l
         self.idx = idx # next index to consider
+
+class GraphStep(NoOpCompare):
+    def __init__(self, g, idx):
+        self.graph = g
+        self.idx = idx # next index to consider

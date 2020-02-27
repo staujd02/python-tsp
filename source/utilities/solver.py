@@ -1,8 +1,30 @@
 from queue import PriorityQueue
 
-from source.dataStructures import Vector, Step
+from source.dataStructures import Vector, Step, GraphStep
+from source.utilities.graph import Graph
 
 class Solver(object):
+    
+    def solve(self, zeroGraph, vectors):
+        queue = PriorityQueue()
+        queue.put((vectors[0][2], Step([vectors[0]], 1)))
+        i = 0
+        while not queue.empty():
+            i += 1
+            (weight, pop) = queue.get()
+            if self.check(zeroGraph, pop.list):
+                zeroGraph.replace(pop.list)
+                return zeroGraph
+            if pop.idx < len(vectors):
+                v = vectors[pop.idx]
+                self.goAcross(v, pop, weight, queue)
+                self.goDeep(v, pop, weight, queue)
+        return None
+
+    def check(self, zeroGraph, alterList):
+        g = zeroGraph.copy()
+        g.replace(alterList)
+        return g.isValid()
     
     def safe_createAugmentList(self, zeroGraph, vectors, stop):
         masterList = []
@@ -28,9 +50,10 @@ class Solver(object):
         while not queue.empty():
             (weight, pop) = queue.get()
             masterList.append(pop.list)
-            v = vectors[pop.idx]
-            self.goAcross(v, pop, weight, queue)
-            self.goDeep(v, pop, weight, queue)
+            if pop.idx < len(vectors):
+                v = vectors[pop.idx]
+                self.goAcross(v, pop, weight, queue)
+                self.goDeep(v, pop, weight, queue)
         return masterList
     
     def goAcross(self, v, pop, weight, queue):
@@ -78,41 +101,3 @@ class Solver(object):
     #         queue = nextQueue
     #         nextQueue = PriorityQueue()
     #     return masterList
-
-    # def lookBack(self, masterList, currentVector, previousVectors, high):
-    #     low = currentVector[2]
-    #     solutionList = []
-    #     for vector in previousVectors:
-    #         if not self.lookForward(solutionList, vector, previousVectors, vector[2], 0, high, [currentVector]):
-    #             break # don't add to solution list here, it's been accounted
-    #     for vector in previousVectors:
-    #         if not self.lookForward(solutionList, vector, previousVectors, 0, low, high, []):
-    #             break # dont' add to solution list here, it's been accounted
-    #     # sort solution list
-    #     # push to master
-
-    # def lookForward(self, masterList, currentVector, forwardVectors, runningWeight, low, high, solution):
-    #     if currentVector[2] + runningWeight > high:
-    #         self.handleBreak(solution, masterList, low, runningWeight)
-    #         return False
-    #     if currentVector[2] + runningWeight == high:
-    #         solution.append(currentVector)
-    #         masterList.append(solution)
-    #         if len(forwardVectors) == 0:
-    #             return False
-    #         return forwardVectors[1][2] > currentVector[2]
-    #     else:
-    #         if len(forwardVectors) == 0:
-    #             # self.handleBreak(solution, masterList)
-    #             raise Exception("You just hit the end of the list?")
-    #         solution.append(currentVector)
-    #         trimmedForwardVectors = forwardVectors[1:]
-    #         newRunningWeight = currentVector[2] + runningWeight
-    #         for vector in trimmedForwardVectors:
-    #             if not self.lookForward(masterList, vector, trimmedForwardVectors, newRunningWeight, low, high, solution):
-    #                 break
-    #         return True
-
-    # def handleBreak(self, solution, masterList, low, runningWeight):
-    #     if len(solution) != 1 and low > runningWeight:
-    #         masterList.append(solution)

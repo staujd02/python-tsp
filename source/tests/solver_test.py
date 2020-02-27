@@ -25,6 +25,10 @@ class Solver_test(unittest.TestCase):
         "C->B": Vector('C', 'B', 175),
         "B->C": Vector('B', 'C', 200),
     }
+    
+    def test_solver_can_check_for_a_solution(self):
+        graph = self.solver.solve(self.zeroGraph, self.vectorList)
+        self.assertIsNotNone(graph)
 
     def test_solver_can_produce_augment_list(self):
         vectorGroups = self.solver.safe_createAugmentList(

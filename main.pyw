@@ -24,10 +24,13 @@ zeroGraph = Graph(zeroVectors)
 # for v in vectorList:
 #     print(str(v))
 
-vectorGroups = Solver().safe_createAugmentList(zeroGraph, vectorList, 10000)
+vectorGroups = Solver().solve(zeroGraph, vectorList)
 
-for v in vectorGroups:
-    print("[")
-    for vx in v:
-        print(str(vx))
-    print("]")
+for v in vectorGroups.data:
+    print(vectorGroups.data[v])
+
+# for v in vectorGroups:
+#     sum = 0
+#     for vx in v:
+#         sum += vx[2]
+#     print("[" + str(sum)  + "]")

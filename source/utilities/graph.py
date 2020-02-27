@@ -1,9 +1,11 @@
-from source.dataStructures import Vector
+import copy
+
+from source.dataStructures import Vector, NoOpCompare
 
 class BranchingGraphError(Exception):
    pass
 
-class Graph(object):
+class Graph(NoOpCompare):
 
     def __init__(self, baseVectors):
         self.data = {}
@@ -13,7 +15,13 @@ class Graph(object):
             self.weight += vector[2]
         if len(self.data) != len(baseVectors):
             raise BranchingGraphError
-        
+
+    def copy(self):
+        g = Graph([])
+        g.data = copy.deepcopy(self.data)
+        g.weight = self.weight
+        return g
+    
     def replace(self, vectorList):
         for vector in vectorList:
             v = self.data[vector[0]]
@@ -42,12 +50,3 @@ class Graph(object):
 
     def __unicode__(self):
         return  u"" + self.__str__()
-
-    # def __getitem__(self, i):
-    #     return self.data[i]
-
-    # def __delitem__(self, i):
-    #     del self.data[i]
-
-    # def __setitem__(self, i, value):
-    #     self.data[i] = value
