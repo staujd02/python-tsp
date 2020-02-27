@@ -24,6 +24,9 @@ class Graph_test(unittest.TestCase):
         "E->B": Vector('E', 'B', 150),
         "C->B": Vector('C', 'B', 175),
         "B->C": Vector('B', 'C', 200),
+        "B->A": Vector('B', 'A', 0),
+        "C->E": Vector('C', 'E', 0),
+        "D->A": Vector('D', 'A', 0),
     }
     
     def test_a_graph_can_copy_itself(self):
@@ -73,14 +76,11 @@ class Graph_test(unittest.TestCase):
 
     def test_integrator_can_integrate_modifications_into_a_graph(self):
         V = self.V
-        vList = [V['D->E'], V['E->B'], V['B->D']]
-        newList = [V['D->E'], V['E->B'], V['B->C']]
+        vList = [V['A->B'], V['B->C'], V['C->E'], V['D->A'], V['E->D']]
+        newList = [V['A->B'], V['B->A'], V['C->E'], V['D->C'], V['E->D']]
         graph = Graph(vList)
-        graph.replace([V['B->C']])
+        graph.replace([V['D->C'], V['B->D'], V['B->A']])
         self.assertEqual(str(Graph(newList)), str(graph))
 
     def vectorCompare(self, v1, v2):
         self.assertEqual(str(v1), str(v2))
-
-    # def setUp(self):
-    #     self.graph = Integrator()

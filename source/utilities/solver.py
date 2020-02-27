@@ -24,6 +24,8 @@ class Solver(object):
     def check(self, zeroGraph, alterList):
         g = zeroGraph.copy()
         g.replace(alterList)
+        if g.getWeight() == 80:
+            print(g)
         return g.isValid()
     
     def safe_createAugmentList(self, zeroGraph, vectors, stop):

@@ -2,8 +2,10 @@ import copy
 
 from source.dataStructures import Vector, NoOpCompare
 
+
 class BranchingGraphError(Exception):
-   pass
+    pass
+
 
 class Graph(NoOpCompare):
 
@@ -21,7 +23,7 @@ class Graph(NoOpCompare):
         g.data = copy.deepcopy(self.data)
         g.weight = self.weight
         return g
-    
+
     def replace(self, vectorList):
         for vector in vectorList:
             v = self.data[vector[0]]
@@ -29,24 +31,39 @@ class Graph(NoOpCompare):
             self.__assignVector(vector)
 
     def isValid(self):
-        destinaton = {}
-        for check in iter(self.data):
-            destinaton[self.data[check][1]] = True
-        return len(destinaton) == len(self.data)
+        visited = {}
+        start = next(iter(self.data))
+        while True:
+            if visited.get(start[0], False):
+                break
+            visited[start[0]] = True
+            start = self.data[start][1]
+        return len(visited) == len(self.data)
 
     def getWeight(self):
         return self.weight
-        
+
     def __assignVector(self, vector):
         self.data[vector[0]] = vector
-    
+
     def __str__(self):
-        literal = "("
-        for vector in iter(self.data):
-            v = self.data[vector]
-            literal += v[0] + "->"
-            lastV = v
-        return  literal + lastV[1] + "): " + str(self.weight)
+        visited = {}
+        start = next(iter(self.data))
+        literal = "(" + start
+        while True:
+            if visited.get(start[0], False):
+                break
+            literal += "->"
+            visited[start[0]] = True
+            start = self.data[start][1]
+            literal += start
+        return literal + "): " + str(self.weight)
+        # literal = "("
+        # for vector in iter(self.data):
+        #     v = self.data[vector]
+        #     literal += v[0] + "->"
+        #     lastV = v
+        # return literal + lastV[1] + "): " + str(self.weight)
 
     def __unicode__(self):
-        return  u"" + self.__str__()
+        return u"" + self.__str__()

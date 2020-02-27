@@ -29,6 +29,9 @@ vectorGroups = Solver().solve(zeroGraph, vectorList)
 for v in vectorGroups.data:
     print(vectorGroups.data[v])
 
+print("")
+print("Weight: " + str(vectorGroups.getWeight()))
+
 # for v in vectorGroups:
 #     sum = 0
 #     for vx in v:
