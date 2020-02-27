@@ -2,10 +2,8 @@ import copy
 
 from source.dataStructures import Vector, NoOpCompare
 
-
 class BranchingGraphError(Exception):
     pass
-
 
 class Graph(NoOpCompare):
 
@@ -58,12 +56,6 @@ class Graph(NoOpCompare):
             start = self.data[start][1]
             literal += start
         return literal + "): " + str(self.weight)
-        # literal = "("
-        # for vector in iter(self.data):
-        #     v = self.data[vector]
-        #     literal += v[0] + "->"
-        #     lastV = v
-        # return literal + lastV[1] + "): " + str(self.weight)
 
     def __unicode__(self):
         return u"" + self.__str__()

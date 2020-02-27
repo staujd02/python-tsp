@@ -70,36 +70,3 @@ class Solver(object):
         l = list(pop.list)
         l.append(v)
         queue.put((newWeight, Step(l, pop.idx + 1)))
-
-    # def iterate(self, masterList, queue, zeroGraph, vectors):
-    #     nextQueue = PriorityQueue()
-    #     for (idx, vector) in enumerate(vectors):
-    #         high = vector[2]
-    #         queue.put((high, Step([vector], idx + 1)))
-    #         while not queue.empty():
-    #             (weight, pop) = queue.get()
-    #             if weight <= high:
-    #                 masterList.append(pop.list)
-    #                 for (i, v) in enumerate(vectors[pop.idx:]):
-    #                     newWeight = weight + v[2]
-    #                     if newWeight <= high:
-    #                         l = list(pop.list)
-    #                         l.append(v)
-    #                         queue.put((newWeight, Step(l, pop.idx + i + 1)))
-    #                     else:
-    #                         if len(pop.list) != 1:
-    #                             l = list(pop.list)
-    #                             poppedV = l.pop()
-    #                             nextQueue.put(
-    #                                 (weight, Step(l, pop.idx + 1)))
-    #                         l = list(pop.list)
-    #                         l.append(v)
-    #                         nextQueue.put(
-    #                             (newWeight, Step(l, pop.idx + i + 1)))
-    #                         break
-    #                 nextQueue.put((weight, Step(pop.list, pop.idx + i + 2)))
-    #             else:
-    #                 nextQueue.put((weight, pop))
-    #         queue = nextQueue
-    #         nextQueue = PriorityQueue()
-    #     return masterList

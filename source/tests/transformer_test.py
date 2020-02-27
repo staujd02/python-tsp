@@ -3,7 +3,6 @@ import unittest
 from source.utilities.transformer import Transformer
 from source.dataStructures import Vector
 
-
 class Transformer_test(unittest.TestCase):
 
     def vectorCompare(self, v1, v2):
