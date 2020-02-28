@@ -1,3 +1,6 @@
+from random import seed, random
+from math import ceil
+
 from source.utilities.transformer import Transformer
 from source.utilities.solver import Solver
 from source.dataStructures import Vector
@@ -11,6 +14,21 @@ matrix = [
     [75,  175,  150,  None,  80],
     [50,  200,  125,   80,  None]
 ]
+
+size = 5
+matrix = []
+min = 20
+max = 1000
+headers = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+headers = headers[:size]
+for row in range(size):
+    matrix.append([])
+    for column in range(size):
+        if row == column:
+            matrix[row].append(None)
+        else:
+            value = min + (random() * (max - min))
+            matrix[row].append(ceil(value))
 
 transformer = Transformer(matrix, headers)
 
@@ -26,11 +44,11 @@ zeroGraph = Graph(zeroVectors)
 
 vectorGroups = Solver().solve(zeroGraph, vectorList)
 
-for v in vectorGroups.data:
-    print(vectorGroups.data[v])
+# for v in vectorGroups.data:
+#     print(vectorGroups.data[v])
 
-print("")
-print("Weight: " + str(vectorGroups.getWeight()))
+print(vectorGroups)
+# print("Weight: " + str(vectorGroups.getWeight()))
 
 # for v in vectorGroups:
 #     sum = 0

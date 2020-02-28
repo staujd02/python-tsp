@@ -50,6 +50,12 @@ class Graph_test(unittest.TestCase):
         graph = Graph(vList)
         self.assertEqual(graph.isValid(), False)
     
+    def test_a_can_output_a_list_of_its_vectors(self):
+        V = self.V
+        vList = [V['A->B'], V['B->A'], V['C->E'], V['D->C'], V['E->D']]
+        graph = Graph(vList)
+        self.assertEqual(graph.toVectorListString(), "{<A->B:50><B->A:0><C->E:0><D->C:75><E->D:30>}")
+    
     def test_a_graph_can_check_for_incorrectness(self):
         V = self.V
         vList = [V['D->E'], V['E->B'], V['B->D'], V['C->B']]
@@ -73,6 +79,14 @@ class Graph_test(unittest.TestCase):
         vList = [V['D->E'], V['E->B'], V['B->D']]
         graph = Graph(vList)
         self.assertEqual(str(graph), "(D->E->B->D): 230")
+    
+    def test_graph_tracks_its_modifications(self):
+        V = self.V
+        vList = [V['A->B'], V['B->C'], V['C->E'], V['D->A'], V['E->D']]
+        graph = Graph(vList)
+        self.assertEqual([], graph.changeList)
+        graph.replace([V['D->C'], V['B->D'], V['B->A']])
+        self.assertEqual([V['D->C'], V['B->D'], V['B->A']], graph.changeList)
 
     def test_integrator_can_integrate_modifications_into_a_graph(self):
         V = self.V
