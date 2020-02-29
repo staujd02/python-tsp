@@ -7,6 +7,29 @@ class Transformer_test(unittest.TestCase):
 
     def vectorCompare(self, v1, v2):
         self.assertEqual(str(v1), str(v2))
+    
+    def test_transformer_prepare_matrix_for_solving(self):
+        (zeroVectors, remaining) = self.transformer.fetchSolvePieces()
+        for (idx, v) in enumerate([Vector('A', 'E', 0), Vector('B', 'A', 0), Vector('C', 'E', 0), Vector('D', 'A', 0), Vector('E', 'A', 0)]):
+            self.vectorCompare(v, zeroVectors.data[v[0]])
+        for (idx, v) in enumerate([
+            Vector('D','E', 5),
+            Vector('C','D', 25),
+            Vector('A','D', 25),
+            Vector('E','D', 30),
+            Vector('A','B', 50),
+            Vector('E','C', 75),
+            Vector('D','C', 75),
+            Vector('B','D', 75),
+            Vector('D','B', 100),
+            Vector('B','E', 100),
+            Vector('C','A', 125),
+            Vector('E','B', 150),
+            Vector('C','B', 175),
+            Vector('B', 'C', 200),
+            Vector('A', 'C', 200)
+        ]):
+            self.vectorCompare(v, remaining[idx])
 
     def test_transformer_can_strip_zero_vectors(self):
         columnVectors = self.transformer.flatten(scaleDown=True,toSort=True)

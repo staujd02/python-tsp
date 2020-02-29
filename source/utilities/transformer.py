@@ -1,10 +1,39 @@
 from source.dataStructures import Vector
+from source.utilities.graph import Graph
+
+import heapq
 
 class Transformer(object):
 
     def __init__(self, matrix, matrixHeaders):
         self.matrix = matrix
         self.headers = matrixHeaders
+
+    def fetchSolvePieces(self):
+        zeroVectors = []
+        vectorHeap = []
+        heapq.heapify(vectorHeap)
+        for (idx, header) in enumerate(self.headers):
+            column = []
+            for rowIdx in range(0, len(self.matrix)):
+                val = self.matrix[rowIdx][idx]
+                if val is not None:
+                    column.append(Vector(header, self.headers[rowIdx], val))
+            column.sort(key=self.sortThird)
+            v = column.pop(0)
+            scale = v[2]
+            v[2] = 0
+            zeroVectors.append(v)
+            for c in column:
+                c.data[2] = c.data[2] - scale
+                heapq.heappush(vectorHeap, c)
+        vectorList = []
+        try:
+            while True:
+                vectorList.append(heapq.heappop(vectorHeap))        
+        except:
+            pass
+        return (Graph(zeroVectors), vectorList)
     
     def stripZeroElements(self, vectors):
         zero = []

@@ -33,6 +33,24 @@ class Vector(object):
 
     def __setitem__(self, i, value):
         self.data[i] = value
+    
+    def __eq__(self, other):
+        return self.data[2] == other.data[2]
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __lt__(self, other):
+        return self.data[2] < other.data[2]
+
+    def __le__(self, other):
+        return self.data[2] <= other.data[2]
+
+    def  __gt__(self, other):
+        return self.data[2] > other.data[2]
+
+    def __ge__(self, other):
+        return self.data[2] >= other.data[2]
 
 class NoOpCompare(object):
     def __eq__(self, other):
