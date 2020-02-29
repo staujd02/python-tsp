@@ -35,6 +35,11 @@ class Graph_test(unittest.TestCase):
         self.assertTrue(graph is not graph.copy())
         self.assertEqual(str(graph), str(graph.copy()))
     
+    def test_a_graph_can_go_deeper(self):
+        V = self.V
+        graph = Graph([V['D->E'], V['E->B'], V['B->D'], V['C->B']])
+
+    
     def test_a_graph_returns_none_when_constructed_with_duplicate_origin_vectors(self):
         V = self.V
         caughtError = False
@@ -84,16 +89,20 @@ class Graph_test(unittest.TestCase):
         V = self.V
         vList = [V['A->B'], V['B->C'], V['C->E'], V['D->A'], V['E->D']]
         graph = Graph(vList)
-        self.assertEqual([], graph.changeList)
-        graph.replace([V['D->C'], V['B->D'], V['B->A']])
-        self.assertEqual([V['D->C'], V['B->D'], V['B->A']], graph.changeList)
+        self.assertEqual(None, graph.lastChange)
+        graph.replace(V['D->C'])
+        graph.replace(V['B->D'])
+        graph.replace(V['B->A'])
+        self.assertEqual(V['B->A'], graph.lastChange)
 
     def test_integrator_can_integrate_modifications_into_a_graph(self):
         V = self.V
         vList = [V['A->B'], V['B->C'], V['C->E'], V['D->A'], V['E->D']]
         newList = [V['A->B'], V['B->A'], V['C->E'], V['D->C'], V['E->D']]
         graph = Graph(vList)
-        graph.replace([V['D->C'], V['B->D'], V['B->A']])
+        graph.replace(V['D->C'])
+        graph.replace(V['B->D'])
+        graph.replace(V['B->A'])
         self.assertEqual(str(Graph(newList)), str(graph))
 
     def vectorCompare(self, v1, v2):

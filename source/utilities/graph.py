@@ -10,7 +10,7 @@ class Graph(NoOpCompare):
     def __init__(self, baseVectors):
         self.data = {}
         self.weight = 0
-        self.changeList = []
+        self.lastChange = None
         for vector in baseVectors:
             self.__assignVector(vector)
             self.weight += vector[2]
@@ -23,12 +23,12 @@ class Graph(NoOpCompare):
         g.weight = self.weight
         return g
 
-    def replace(self, vectorList):
-        for vector in vectorList:
-            self.changeList.append(vector)
-            v = self.data[vector[0]]
-            self.weight += vector[2] - v[2]
-            self.__assignVector(vector)
+    def replace(self, vector):
+        # for vector in vectorList:
+        self.lastChange = vector
+        v = self.data[vector[0]]
+        self.weight += vector[2] - v[2]
+        self.__assignVector(vector)
 
     def isValid(self):
         visited = {}

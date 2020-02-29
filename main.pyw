@@ -55,7 +55,6 @@ def populateEuclideanMatrix(matrix, size):
                 row.append(calculateDistance(point1[0], point1[1], point2[0], point2[1]))
         matrix.append(row)
 
-
 def runTest(size):
     matrix = []
     start = time.time()
@@ -65,9 +64,9 @@ def runTest(size):
     start = time.time()
     vectorGroups = Solver().solve(zeroGraph, vectorList)
     end = time.time()
-    # print("Run Time: " + str(end - start))
-    # print(vectorGroups)
-    # print("")
+    print("Run Time: " + str(end - start))
+    print(vectorGroups)
+    print("")
     return end - start
 
 def runSuite(trialList, iterations):
@@ -86,8 +85,11 @@ def runSuite(trialList, iterations):
         print("=================")
     print("Trials Complete.")
 
-# runTest(10)
-runSuite([4,5,6,7,8,9], 10)
+
+for i in range(5):
+    seed(i)
+    runTest(9)
+# runSuite([7], 1)
 
 # print("Weight: " + str(vectorGroups.getWeight()))
 
