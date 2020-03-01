@@ -7,28 +7,30 @@ class Solver(object):
     
     def solve(self, zeroGraph, vectors):
         queue = PriorityQueue()
-        queue.put((vectors[0][2], Step([vectors[0]], 1)))
-        i = 0
-        runningWeight = vectors[0][2]
+        graph = zeroGraph.copy()
+        graph.replace(vectors[0])
+        queue.put((graph.getWeight(), GraphStep(graph, 1)))
+        runningWeight = graph.getWeight()
         while not queue.empty():
-            i += 1
             (weight, pop) = queue.get()
-            g = self.check(zeroGraph, pop.list)
-            if g.isValid():
-                zeroGraph.replace(pop.list)
-                return zeroGraph
+            if pop.graph.isValid():
+                return pop.graph
             if pop.idx < len(vectors):
                 v = vectors[pop.idx]
-                self.goAcross(v, pop, weight, queue)
-                if g.getWeight() >= runningWeight:
-                    runningWeight = g.getWeight()
-                    self.goDeep(v, pop, weight, queue)
+                self.goGraphAcross(v, pop, weight, queue)
+                if pop.graph.getWeight() >= runningWeight:
+                    runningWeight = pop.graph.getWeight()
+                    self.goGraphDeep(v, pop, weight, queue)
         return None
     
-    def check(self, zeroGraph, alterList):
-        g = zeroGraph.copy()
-        g.replace(alterList)
-        return g
+    def goGraphAcross(self, v, pop, weight, queue):
+        graph = pop.graph.copy()
+        newWeight = graph.goAcross(v, weight)
+        queue.put((newWeight, GraphStep(graph, pop.idx + 1)))
+    
+    def goGraphDeep(self, v, pop, weight, queue):
+        newWeight = pop.graph.goDeeper(v, weight)
+        queue.put((newWeight, GraphStep(pop.graph, pop.idx + 1)))
     
     def safe_createAugmentList(self, zeroGraph, vectors, stop):
         masterList = []

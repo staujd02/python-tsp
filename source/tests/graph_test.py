@@ -34,11 +34,34 @@ class Graph_test(unittest.TestCase):
         graph = Graph([V['D->E'], V['E->B'], V['B->D'], V['C->B']])
         self.assertTrue(graph is not graph.copy())
         self.assertEqual(str(graph), str(graph.copy()))
+        self.assertEqual(graph.lastChange, graph.copy().lastChange)
+        self.assertEqual(graph.graphLength, graph.copy().graphLength)
     
     def test_a_graph_can_go_deeper(self):
         V = self.V
         graph = Graph([V['D->E'], V['E->B'], V['B->D'], V['C->B']])
-
+        w = graph.getWeight()
+        newWeight = graph.goDeeper(V['E->C'], w)
+        self.assertEqual(newWeight, w + V['E->C'][2])
+        self.assertEqual(graph.data['E'], V['E->C'])
+        self.assertEqual(graph.lastChange, V['E->B'])
+    
+    def test_a_graph_can_go_across(self):
+        V = self.V
+        vList = [V['D->E'], V['E->B'], V['B->D'], V['C->B']]
+        graph = Graph(vList)
+        graph.replace(V['D->C'])
+        newWeight = graph.goAcross(V['E->C'], graph.getWeight())
+        expectedNewWeight = V['D->E'][2] + V['E->C'][2] + V['B->D'][2] + V['C->B'][2]
+        self.assertEqual(graph.data['E'], V['E->C'])
+        self.assertEqual(graph.data['D'], V['D->E'])
+        self.assertEqual(graph.lastChange, V['E->B'])
+        self.assertEqual(newWeight, expectedNewWeight)
+        try:
+            graph.data['C']
+            self.assertTrue(False, "'C' is still a key")
+        except:
+            pass
     
     def test_a_graph_returns_none_when_constructed_with_duplicate_origin_vectors(self):
         V = self.V
@@ -91,9 +114,7 @@ class Graph_test(unittest.TestCase):
         graph = Graph(vList)
         self.assertEqual(None, graph.lastChange)
         graph.replace(V['D->C'])
-        graph.replace(V['B->D'])
-        graph.replace(V['B->A'])
-        self.assertEqual(V['B->A'], graph.lastChange)
+        self.assertEqual(str(V['D->A']), str(graph.lastChange))
 
     def test_integrator_can_integrate_modifications_into_a_graph(self):
         V = self.V

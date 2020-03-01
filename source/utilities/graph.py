@@ -11,6 +11,7 @@ class Graph(NoOpCompare):
         self.data = {}
         self.weight = 0
         self.lastChange = None
+        self.graphLength = len(baseVectors)
         for vector in baseVectors:
             self.__assignVector(vector)
             self.weight += vector[2]
@@ -21,18 +22,34 @@ class Graph(NoOpCompare):
         g = Graph([])
         g.data = copy.deepcopy(self.data)
         g.weight = self.weight
+        g.lastChange = self.lastChange
+        g.graphLength = self.graphLength
         return g
+    
+    def goAcross(self, vector, weight):
+        oldWeight = self.lastChange[2]
+        self.swapOutLastChange()
+        self.replace(vector)
+        return  weight - oldWeight + vector[2]
+    
+    def swapOutLastChange(self):
+        self.replace(self.lastChange)
+
+    def goDeeper(self, vector, weight):
+        self.replace(vector)
+        return weight + vector[2]
 
     def replace(self, vector):
-        # for vector in vectorList:
-        self.lastChange = vector
         v = self.data[vector[0]]
+        self.lastChange = v
         self.weight += vector[2] - v[2]
         self.__assignVector(vector)
 
     def isValid(self):
         visited = {}
         start = next(iter(self.data))
+        if len(self.data) != self.graphLength:
+            return False
         while True:
             if visited.get(start[0], False):
                 break

@@ -88,7 +88,7 @@ def runSuite(trialList, iterations):
 
 for i in range(5):
     seed(i)
-    runTest(9)
+    runTest(6)
 # runSuite([7], 1)
 
 # print("Weight: " + str(vectorGroups.getWeight()))
