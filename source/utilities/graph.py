@@ -7,7 +7,9 @@ class BranchingGraphError(Exception):
 
 class Graph(NoOpCompare):
 
-    def __init__(self, baseVectors):
+    def __init__(self, baseVectors, skipSpinUp=False):
+        if skipSpinUp:
+            return
         self.data = {}
         self.weight = 0
         self.lastChange = None
@@ -19,7 +21,7 @@ class Graph(NoOpCompare):
             raise BranchingGraphError
 
     def copy(self):
-        g = Graph([])
+        g = Graph([], skipSpinUp=True)
         g.data = copy.deepcopy(self.data)
         g.weight = self.weight
         g.lastChange = self.lastChange
