@@ -27,8 +27,7 @@ class Solver_test(unittest.TestCase):
     }
     
     def test_solver_can_check_for_a_solution(self):
-        # graph = self.solver.solve(self.zeroGraph, self.vectorList)
-        graph = None
+        graph = self.solver.solve(self.zeroGraph, self.vectorList)
         self.assertIsNotNone(graph)
 
     def test_solver_can_produce_augment_list(self):

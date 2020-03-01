@@ -51,8 +51,8 @@ class Graph_test(unittest.TestCase):
         vList = [V['D->E'], V['E->B'], V['B->D'], V['C->B']]
         graph = Graph(vList)
         graph.replace(V['D->C'])
-        newWeight = graph.goAcross(V['E->C'], graph.getWeight())
-        expectedNewWeight = V['D->E'][2] + V['E->C'][2] + V['B->D'][2] + V['C->B'][2]
+        newWeight = graph.goAcross(V['E->C'], V['D->C'][2])
+        expectedNewWeight = V['E->C'][2]
         self.assertEqual(graph.data['E'], V['E->C'])
         self.assertEqual(graph.data['D'], V['D->E'])
         self.assertEqual(graph.lastChange, V['E->B'])

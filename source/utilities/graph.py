@@ -27,7 +27,7 @@ class Graph(NoOpCompare):
         return g
     
     def goAcross(self, vector, weight):
-        oldWeight = self.lastChange[2]
+        oldWeight = self.data[self.lastChange[0]][2]
         self.swapOutLastChange()
         self.replace(vector)
         return  weight - oldWeight + vector[2]
@@ -47,15 +47,14 @@ class Graph(NoOpCompare):
 
     def isValid(self):
         visited = {}
-        start = next(iter(self.data))
-        if len(self.data) != self.graphLength:
-            return False
+        start = next(iter(self.data))[0]
+        beginning = start
         while True:
-            if visited.get(start[0], False):
+            if visited.get(start, False):
                 break
-            visited[start[0]] = True
+            visited[start] = True
             start = self.data[start][1]
-        return len(visited) == len(self.data)
+        return len(visited) == len(self.data) and start == beginning
 
     def getWeight(self):
         return self.weight

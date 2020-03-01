@@ -10,7 +10,7 @@ class Solver(object):
         graph = zeroGraph.copy()
         graph.replace(vectors[0])
         queue.put((graph.getWeight(), GraphStep(graph, 1)))
-        runningWeight = graph.getWeight()
+        # runningWeight = graph.getWeight()
         while not queue.empty():
             (weight, pop) = queue.get()
             if pop.graph.isValid():
@@ -18,9 +18,9 @@ class Solver(object):
             if pop.idx < len(vectors):
                 v = vectors[pop.idx]
                 self.goGraphAcross(v, pop, weight, queue)
-                if pop.graph.getWeight() >= runningWeight:
-                    runningWeight = pop.graph.getWeight()
-                    self.goGraphDeep(v, pop, weight, queue)
+                # if pop.graph.getWeight() >= runningWeight:
+                #     runningWeight = pop.graph.getWeight()
+                self.goGraphDeep(v, pop, weight, queue)
         return None
     
     def goGraphAcross(self, v, pop, weight, queue):
