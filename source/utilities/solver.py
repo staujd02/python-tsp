@@ -3,6 +3,8 @@ from queue import PriorityQueue
 from source.dataStructures import Vector, Step, GraphStep
 from source.utilities.graph import Graph
 
+from time import time
+
 class Solver(object):
     
     def solve(self, zeroGraph, vectors):
@@ -11,26 +13,50 @@ class Solver(object):
         graph.replace(vectors[0])
         queue.put((graph.getWeight(), GraphStep(graph, 1)))
         runningWeight = graph.getWeight()
+        timeSpentGoingAcross = 0
+        timeSpentGoingDeeper = 0
+        timeSpentVerifying = 0
         while not queue.empty():
             (weight, pop) = queue.get()
-            if pop.graph.isValid():
+            # TIME BLOCK
+            start = time()
+            isValid = pop.graph.isValid()
+            timeSpentVerifying += time() - start
+            # TIME BLOCK
+            if isValid:
+                print("Run Time of Across: " + str(timeSpentGoingAcross))
+                print("Run Time of Deeper: " + str(timeSpentGoingDeeper))
+                print("Run Time of Verifying: " + str(timeSpentVerifying))
                 return pop.graph
             if pop.idx < len(vectors):
                 v = vectors[pop.idx]
-                self.goGraphAcross(v, pop, weight, queue)
                 if pop.graph.getWeight() >= runningWeight:
                     runningWeight = pop.graph.getWeight()
+                    # TIME BLOCK
+                    start = time()
                     self.goGraphDeep(v, pop, weight, queue)
+                    timeSpentGoingDeeper += time() - start
+                    # TIME BLOCK
+                # TIME BLOCK
+                start = time()
+                self.goGraphAcross(v, pop, weight, queue)
+                timeSpentGoingAcross += time() - start
+                # TIME BLOCK
         return None
     
+    # start = time.time()
+    # vectorGroups = Solver().solve(zeroGraph, vectorList)
+    # end = time.time()
+    # print("Run Time: " + str(end - start))
+    
     def goGraphAcross(self, v, pop, weight, queue):
-        graph = pop.graph.copy()
-        newWeight = graph.goAcross(v, weight)
-        queue.put((newWeight, GraphStep(graph, pop.idx + 1)))
+        newWeight = pop.graph.goAcross(v, weight)
+        queue.put((newWeight, GraphStep(pop.graph, pop.idx + 1)))
     
     def goGraphDeep(self, v, pop, weight, queue):
-        newWeight = pop.graph.goDeeper(v, weight)
-        queue.put((newWeight, GraphStep(pop.graph, pop.idx + 1)))
+        graph = pop.graph.copy()
+        newWeight = graph.goDeeper(v, weight)
+        queue.put((newWeight, GraphStep(graph, pop.idx + 1)))
     
     def safe_createAugmentList(self, zeroGraph, vectors, stop):
         masterList = []
