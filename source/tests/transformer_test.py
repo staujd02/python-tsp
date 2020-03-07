@@ -8,10 +8,21 @@ class Transformer_test(unittest.TestCase):
     def vectorCompare(self, v1, v2):
         self.assertEqual(str(v1), str(v2))
     
+    def vectorKeyCompare(self, vKey, vVal):
+        self.assertEqual(vKey, vVal[0] + '->' + vVal[1])
+
+    V = {
+        'A->E': Vector('A', 'E', 0),
+        'B->A': Vector('B', 'A', 0),
+        'C->E': Vector('C', 'E', 0),
+        'D->A': Vector('D', 'A', 0), 
+        'E->A': Vector('E', 'A', 0)
+    }
+    
     def test_transformer_prepare_matrix_for_solving(self):
         (zeroVectors, remaining) = self.transformer.fetchSolvePieces()
         for (idx, v) in enumerate([Vector('A', 'E', 0), Vector('B', 'A', 0), Vector('C', 'E', 0), Vector('D', 'A', 0), Vector('E', 'A', 0)]):
-            self.vectorCompare(v, zeroVectors.data[v[0]])
+            self.vectorKeyCompare(zeroVectors.data[idx], v)
         for (idx, v) in enumerate([
             Vector('D','E', 5),
             Vector('C','D', 25),

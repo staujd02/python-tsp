@@ -14,12 +14,15 @@ class Graph(NoOpCompare):
         self.weight = 0
         self.lastChange = None
         self.vectorList = vectorList
+        charList = ''
         for v in baseVectors:
             vector = vectorList[v]
             self.data.append(vector[0] + '->' + vector[1])
             self.weight += vector[2]
-        if len(self.data) != len(baseVectors):
-            raise BranchingGraphError
+            if charList.find(vector[0]) == -1:
+                charList += vector[0] 
+            else:
+                raise BranchingGraphError
 
     def translate(self, key):
         return ord(key) - 65
@@ -33,7 +36,8 @@ class Graph(NoOpCompare):
         return g
     
     def goAcross(self, vector, weight):
-        oldWeight = self.vectorList[self.lastChange][2]
+        i = self.translate(self.lastChange[0])
+        oldWeight = self.vectorList[self.data[i]][2]
         self.swapOutLastChange()
         self.replace(vector)
         return  weight - oldWeight + vector[2]

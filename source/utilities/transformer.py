@@ -12,6 +12,7 @@ class Transformer(object):
     def fetchSolvePieces(self):
         zeroVectors = []
         vectorHeap = []
+        vectorDict = {}
         heapq.heapify(vectorHeap)
         for (idx, header) in enumerate(self.headers):
             column = []
@@ -23,17 +24,28 @@ class Transformer(object):
             v = column.pop(0)
             scale = v[2]
             v[2] = 0
-            zeroVectors.append(v)
+            key = self.getKey(v)
+            zeroVectors.append(key)
+            self.pushVectorIntoDict(vectorDict, key, v)
             for c in column:
                 c.data[2] = c.data[2] - scale
                 heapq.heappush(vectorHeap, c)
+                key = self.getKey(c)
+                self.pushVectorIntoDict(vectorDict, key, c)
         vectorList = []
         try:
             while True:
-                vectorList.append(heapq.heappop(vectorHeap))        
+                v = heapq.heappop(vectorHeap)
+                vectorList.append(v)        
         except:
             pass
-        return (Graph(zeroVectors), vectorList)
+        return (Graph(zeroVectors, vectorDict), vectorList)
+
+    def pushVectorIntoDict(self, dict, key, v):
+        dict[key] = v
+
+    def getKey(self, v):
+        return v[0] + '->' + v[1]
     
     def stripZeroElements(self, vectors):
         zero = []

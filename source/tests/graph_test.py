@@ -47,10 +47,10 @@ class Graph_test(unittest.TestCase):
         V = self.V
         graph = Graph(['A->B', 'B->D', 'C->B', 'D->A'], V)
         w = graph.getWeight()
-        newWeight = graph.goDeeper(V['E->C'], w)
-        self.assertEqual(newWeight, w + V['E->C'][2])
-        self.assertEqual(graph.data[4], 'E->C')
-        self.assertEqual(graph.lastChange, 'E->B')
+        newWeight = graph.goDeeper(V['D->B'], w)
+        self.assertEqual(newWeight, w + V['D->B'][2])
+        self.assertEqual(graph.data[3], 'D->B')
+        self.assertEqual(graph.lastChange, 'D->A')
     
     def test_a_graph_can_go_across(self):
         V = self.V
@@ -107,7 +107,7 @@ class Graph_test(unittest.TestCase):
         V = self.V
         vList = ['A->B', 'B->C', 'C->A']
         graph = Graph(vList, V)
-        self.assertEqual(str(graph), "(A->B->C->A): 230")
+        self.assertEqual(str(graph), "(A->B->C->A): 375")
     
     def test_graph_tracks_its_modifications(self):
         V = self.V
