@@ -6,7 +6,8 @@ testGen = TestGenerator()
 
 for i in range(5):
     seed(i)
-    testGen.runTest(9)
+    testGen.runTest(5)
+    testGen.runClassicalTest(5)
     print("")
 # runSuite([7], 1)
 

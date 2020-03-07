@@ -76,3 +76,12 @@ class TestGenerator(object):
             print("Variance: " + str(statistics.pvariance(trials, mean)))
             print("=================")
         print("Trials Complete.")
+
+    def runClassicalTest(self, size):
+        matrix = []
+        self.populateEuclideanMatrix(matrix, size)
+        transformer = Transformer(matrix, self.headers[:size])
+        vectors = transformer.flatten(scaleDown=True, toSort=True)
+        (zeroVectors, vectorList) = transformer.stripZeroElements(vectors)
+        for v in Solver().oldSolve(zeroVectors, vectorList):
+            print(v)
