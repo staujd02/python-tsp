@@ -27,14 +27,17 @@ class Solver_test(unittest.TestCase):
     }
     
     def test_solver_can_check_for_a_solution(self):
-        graph = self.solver.solve(self.zeroGraph, self.vectorList)
+        (zeroGraph, vectorList) = self.transformer.fetchSolvePieces()
+        graph = self.solver.solve(zeroGraph, vectorList)
         self.assertIsNotNone(graph)
         if(str(graph) != "(A->E->C->D->B->A): 200" and str(graph) != "(A->B->D->C->E->A): 200"):
             self.assertTrue(False, "Graph " + str(graph) + " not in accepted solution set.")
 
     def test_solver_can_produce_augment_list(self):
+        vectors = self.transformer.flatten(scaleDown=True, toSort=True)
+        (zeroVectors, vectorList) = self.transformer.stripZeroElements(vectors)
         vectorGroups = self.solver.safe_createAugmentList(
-            self.zeroGraph, self.vectorList, 9)
+            zeroVectors, vectorList, 9)
         for (i, vectors) in enumerate(self.solution):
             for (idx, v) in enumerate(vectors):
                 self.vectorCompare(v, vectorGroups[i][idx])
@@ -75,8 +78,5 @@ class Solver_test(unittest.TestCase):
             [75,  175,  150,  None,  80],
             [50,  200,  125,   80,  None]
         ]
-        transformer = Transformer(self.test, self.headers)
-        vectors = transformer.flatten(scaleDown=True, toSort=True)
-        (zeroVectors, self.vectorList) = transformer.stripZeroElements(vectors)
-        self.zeroGraph = Graph(zeroVectors)
+        self.transformer = Transformer(self.test, self.headers)
         self.solver = Solver()
