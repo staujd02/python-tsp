@@ -4,17 +4,15 @@ from source.utilities.test_generator import TestGenerator
 
 testGen = TestGenerator()
 
-for i in range(5):
-    seed(i)
-    testGen.runTest(5)
-    testGen.runClassicalTest(5)
-    print("")
-# runSuite([7], 1)
+# seed(5)
+# testGen.runIterationTest(5, 100)
+# for i in range(5):
+#     seed(i)
+#     print("Graph:")
+#     testGen.runTest(9)
+#     seed(i)
+#     print("Classical:")
+#     testGen.runClassicalTest(9)
+#     print("")
 
-# print("Weight: " + str(vectorGroups.getWeight()))
-
-# for v in vectorGroups:
-#     sum = 0
-#     for vx in v:
-#         sum += vx[2]
-#     print("[" + str(sum)  + "]")
+testGen.runSuite([7, 8], 4)

@@ -1,13 +1,14 @@
-import time
 import statistics
+import time
 
 from source.utilities.transformer import Transformer
 from source.utilities.solver import Solver
 from source.dataStructures import Vector
 from source.utilities.graph import Graph
+from source.utilities.timer import Timer
 
 from random import seed, random
-from math import ceil, sqrt
+from source.utilities.matrix_builder import MatrixBuilder
 
 class TestGenerator(object):
 
@@ -16,50 +17,13 @@ class TestGenerator(object):
     'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2', 'O2', 'P2', 'Q2', 'R2', 'S2', 'T2', 'U2', 'V2', 'W2', 'X2', 'Y2', 'Z2',
     'A3', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'H3', 'I3', 'J3', 'K3', 'L3', 'M3', 'N3', 'O3', 'P3', 'Q3', 'R3', 'S3', 'T3', 'U3', 'V3', 'W3', 'X3', 'Y3', 'Z3']
 
-    def populateRandomMatrix(self, matrix, size):
-        for row in range(size):
-            matrix.append([])
-            for column in range(size):
-                if row == column:
-                    matrix[row].append(None)
-                else:
-                    value = min + (random() * (max - min))
-                    matrix[row].append(ceil(value))
-
-    def calculateDistance(self, x1,y1,x2,y2):  
-        dist = sqrt((x2 - x1)**2 + (y2 - y1)**2)  
-        return ceil(dist)
-
-    def getRand(self, min, max):
-        value = min + (random() * (max - min))
-        return ceil(value)
-
-    def populateEuclideanMatrix(self, matrix, size):
-        points = []
-        for i in range(size):
-            points.append([self.getRand(0, 1000), self.getRand(0, 1000)])
-        for (idx, point1) in enumerate(points):
-            row = []
-            for (jdx, point2) in enumerate(points):
-                if idx == jdx:
-                    row.append(None)
-                else:
-                    row.append(self.calculateDistance(point1[0], point1[1], point2[0], point2[1]))
-            matrix.append(row)
-
     def runTest(self, size):
         matrix = []
-        start = time.time()
-        self.populateEuclideanMatrix(matrix, size)
-        end = time.time()
+        MatrixBuilder.populateEuclideanMatrix(matrix, size)
         (zeroGraph, vectorList) = Transformer(matrix, self.headers[:size]).fetchSolvePieces()
-        start = time.time()
-        vectorGroups = Solver().solve(zeroGraph, vectorList)
-        end = time.time()
-        print("Run Time: " + str(end - start))
-        print(vectorGroups)
-        print("")
-        return end - start
+        (vList, runTime) = Timer.time("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList), True)
+        print(vList)
+        return runTime
 
     def runSuite(self, trialList, iterations):
         print("Begining Trials...")
@@ -79,9 +43,18 @@ class TestGenerator(object):
 
     def runClassicalTest(self, size):
         matrix = []
-        self.populateEuclideanMatrix(matrix, size)
-        transformer = Transformer(matrix, self.headers[:size])
-        vectors = transformer.flatten(scaleDown=True, toSort=True)
-        (zeroVectors, vectorList) = transformer.stripZeroElements(vectors)
-        for v in Solver().oldSolve(zeroVectors, vectorList):
-            print(v)
+        MatrixBuilder.populateEuclideanMatrix(matrix, size)
+        (zeroGraph, vectorList) = Transformer(matrix, self.headers[:size]).fetchSolvePieces()
+        print(Timer.time("Run Time: ", lambda: Solver().oldSolve(zeroGraph, vectorList)))
+    
+    def runIterationTest(self, size, depth):
+        matrix = []
+        MatrixBuilder.populateEuclideanMatrix(matrix, size)
+        (zeroGraph, vectorList) = Transformer(matrix, self.headers[:size]).fetchSolvePieces()
+        for x in Solver().safe_createAugmentList(zeroGraph, vectorList, depth):
+            w = 0
+            s = '['
+            for v in x:
+                w += v[2]
+                s += str(v)
+            print(s + ']: ' + str(w))

@@ -13,43 +13,37 @@ class Solver(object):
         graph.replace(vectors[0])
         queue.put((graph.getWeight(), GraphStep(graph, 1)))
         runningWeight = graph.getWeight()
-        timeSpentGoingAcross = 0
-        timeSpentGoingDeeper = 0
-        timeSpentVerifying = 0
+        # timeSpentGoingAcross = 0
+        # timeSpentGoingDeeper = 0
+        # timeSpentVerifying = 0
         while not queue.empty():
             (weight, pop) = queue.get()
             # TIME BLOCK
-            start = time()
+            # start = time()
             isValid = pop.graph.isValid()
-            timeSpentVerifying += time() - start
+            # timeSpentVerifying += time() - start
             # TIME BLOCK
             if isValid:
-                print("Run Time of Across: " + str(timeSpentGoingAcross))
-                print("Run Time of Deeper: " + str(timeSpentGoingDeeper))
-                print("Run Time of Verifying: " + str(timeSpentVerifying))
+                # print("Run Time of Across: " + str(timeSpentGoingAcross))
+                # print("Run Time of Deeper: " + str(timeSpentGoingDeeper))
+                # print("Run Time of Verifying: " + str(timeSpentVerifying))
                 return pop.graph
             if pop.idx < len(vectors):
                 v = vectors[pop.idx]
                 if pop.graph.getWeight() >= runningWeight:
                     runningWeight = pop.graph.getWeight()
-                    # TIME BLOCK
-                    start = time()
-                    self.goGraphDeep(v, pop, weight, queue)
-                    timeSpentGoingDeeper += time() - start
-                    # TIME BLOCK
                 # TIME BLOCK
-                start = time()
+                # start = time()
+                    self.goGraphDeep(v, pop, weight, queue)
+                # timeSpentGoingDeeper += time() - start
+                # TIME BLOCK
+                # TIME BLOCK
+                # start = time()
                 self.goGraphAcross(v, pop, weight, queue)
-                timeSpentGoingAcross += time() - start
+                # timeSpentGoingAcross += time() - start
                 # TIME BLOCK
         return None
 
-    def check(self, zeroGraph, alterList):
-        g = zeroGraph.copy()
-        g.replace(alterList)
-        if g.getWeight() == 80:
-            print(g)
-        return g.isValid()
     
     def goGraphAcross(self, v, pop, weight, queue):
         newWeight = pop.graph.goAcross(v, weight)
@@ -68,13 +62,36 @@ class Solver(object):
             i += 1
             (weight, pop) = queue.get()
             if self.check(zeroGraph, pop.list):
-                zeroGraph.replace(pop.list)
+                self.transform(zeroGraph, pop.list)
                 return zeroGraph
             if pop.idx < len(vectors):
                 v = vectors[pop.idx]
                 self.goAcross(v, pop, weight, queue)
                 self.goDeep(v, pop, weight, queue)
         return None
+
+    def goAcross(self, v, pop, weight, queue):
+        l = list(pop.list)
+        oldVector = l.pop()
+        l.append(v)
+        newWeight = weight - oldVector[2] + v[2]
+        queue.put((newWeight, Step(l, pop.idx + 1)))
+    
+    def goDeep(self, v, pop, weight, queue):
+        newWeight = weight + v[2]
+        l = list(pop.list)
+        l.append(v)
+        queue.put((newWeight, Step(l, pop.idx + 1)))
+
+    def check(self, zeroGraph, alterList):
+        g = zeroGraph.copy()
+        self.transform(g, alterList)
+        return g.isValid()
+
+    def transform(self, g, alterList):
+        for v in alterList:
+            g.replace(v)
+        return g
 
     def safe_createAugmentList(self, zeroGraph, vectors, stop):
         masterList = []
@@ -106,15 +123,3 @@ class Solver(object):
                 self.goDeep(v, pop, weight, queue)
         return masterList
     
-    def goAcross(self, v, pop, weight, queue):
-        l = list(pop.list)
-        oldVector = l.pop()
-        l.append(v)
-        newWeight = weight - oldVector[2] + v[2]
-        queue.put((newWeight, Step(l, pop.idx + 1)))
-    
-    def goDeep(self, v, pop, weight, queue):
-        newWeight = weight + v[2]
-        l = list(pop.list)
-        l.append(v)
-        queue.put((newWeight, Step(l, pop.idx + 1)))

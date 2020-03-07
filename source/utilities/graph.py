@@ -7,6 +7,8 @@ class BranchingGraphError(Exception):
 
 class Graph(NoOpCompare):
 
+    annotation = '->'
+
     def __init__(self, baseVectors, vectorList, skipSpinUp=False):
         if skipSpinUp:
             return
@@ -17,16 +19,12 @@ class Graph(NoOpCompare):
         charList = ''
         for v in baseVectors:
             vector = vectorList[v]
-            self.data.append(vector[0] + '->' + vector[1])
+            self.data.append(self.toKey(vector))
             self.weight += vector[2]
             if charList.find(vector[0]) == -1:
                 charList += vector[0] 
             else:
                 raise BranchingGraphError
-
-    def translate(self, key):
-        return ord(key) - 65
-
     def copy(self):
         g = Graph([], [], skipSpinUp=True)
         g.data = list(self.data)
@@ -79,7 +77,7 @@ class Graph(NoOpCompare):
 
     def __assignVector(self, vector):
         i = self.translate(vector[0])
-        self.data[i] = vector[0] + '->' + vector[1]
+        self.data[i] = self.toKey(vector)
 
     def __str__(self):
         visited = {}
@@ -88,12 +86,21 @@ class Graph(NoOpCompare):
         while True:
             if visited.get(start, False):
                 break
-            literal += "->"
+            literal += self.annotation
             visited[start] = True
             i = self.translate(start)
-            start = self.data[i][3]
+            start = self.destintationAt(i)
             literal += start
         return literal + "): " + str(self.weight)
 
     def __unicode__(self):
         return u"" + self.__str__()
+
+    def translate(self, key):
+        return ord(key) - 65
+    
+    def toKey(self, v):
+        return v[0] + self.annotation + v[1]
+
+    def destintationAt(self, i):
+        return self.data[i][1 + len(self.annotation)]
