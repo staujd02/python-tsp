@@ -8,6 +8,7 @@ from source.dataStructures import Vector
 from source.utilities.graph import Graph
 from source.utilities.timer import Timer
 from source.utilities.graham_scan import GrahamScan
+from source.utilities.exclusion_generator import ExclusionGenerator
 
 from random import seed, random
 from source.utilities.matrix_builder import MatrixBuilder
@@ -18,7 +19,8 @@ class TestGenerator(object):
         matrix = []
         points = MatrixBuilder.populateEuclideanMatrix(matrix, size)
         hullList = GrahamScan.getConvexHull(points)
-        (zeroGraph, vectorList) = Transformer(matrix, self.getHeaders(size), hullList).fetchSolvePieces()
+        exclusionList = ExclusionGenerator.generateExclusionList(hullList)
+        (zeroGraph, vectorList) = Transformer(matrix, self.getHeaders(size), exclusionList).fetchSolvePieces()
         (vList, runTime) = Timer.time("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList), True)
         print(vList)
         return runTime

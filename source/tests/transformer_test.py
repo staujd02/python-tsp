@@ -137,4 +137,5 @@ class Transformer_test(unittest.TestCase):
             [75,  175,  150,  None,  80],
             [50,  200,  125,   80,  None]
         ]
-        self.transformer = Transformer(self.test, self.headers)
+        self.test = list(map(lambda t: list(map(lambda r: None if r == None else [r], t)), self.test))
+        self.transformer = Transformer(self.test, self.headers, [])

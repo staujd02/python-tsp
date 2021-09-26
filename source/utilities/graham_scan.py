@@ -6,12 +6,14 @@ class GrahamScan(object):
    
    @staticmethod
    def getConvexHull(plotList):
-        hull = []
         points = deepcopy(plotList)
         points.sort(key=lambda x:[x[0],x[1]])
         start = points.pop(0)
-        hull.append(start)
         points.sort(key=lambda p: (GrahamScan.__getSlope(p, start), -p[1], p[0]))
+        return GrahamScan.__performScanOverHullWithStartPoint([start], points)
+   
+   @staticmethod
+   def __performScanOverHullWithStartPoint(hull, points):
         for pt in points:
             hull.append(pt)
             while len(hull) > 2 and GrahamScan.__getCrossProduct(hull[-3], hull[-2], hull[-1]) < 0:

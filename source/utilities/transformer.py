@@ -5,10 +5,10 @@ import heapq
 
 class Transformer(object):
 
-    def __init__(self, matrix, matrixHeaders, hullPoints):
+    def __init__(self, matrix, matrixHeaders, exclusionList):
         self.matrix = matrix
         self.headers = matrixHeaders
-        self.hullPoints = hullPoints
+        self.exclusionList = exclusionList 
 
     def fetchSolvePieces(self):
         zeroVectors = []
@@ -20,7 +20,7 @@ class Transformer(object):
             for rowIdx in range(0, len(self.matrix)):
                 val = self.matrix[rowIdx][idx]
                 if val is not None:
-                    column.append(Vector(header, self.headers[rowIdx], val))
+                    column.append(Vector(header, self.headers[rowIdx], val[0]))
             column.sort(key=self.sortThird)
             v = column.pop(0)
             scale = v[2]
@@ -104,7 +104,7 @@ class Transformer(object):
             for rowIdx in range(0, len(self.matrix)):
                 val = self.matrix[rowIdx][columnIdx]
                 if val is not None:
-                    vector.append(Vector(header, self.headers[rowIdx], val))
+                    vector.append(Vector(header, self.headers[rowIdx], val[0]))
     
     @staticmethod
     def sortThird(val): 
