@@ -5,9 +5,10 @@ import heapq
 
 class Transformer(object):
 
-    def __init__(self, matrix, matrixHeaders):
+    def __init__(self, matrix, matrixHeaders, hullPoints):
         self.matrix = matrix
         self.headers = matrixHeaders
+        self.hullPoints = hullPoints
 
     def fetchSolvePieces(self):
         zeroVectors = []

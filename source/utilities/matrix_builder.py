@@ -16,6 +16,7 @@ class MatrixBuilder(object):
                 else:
                     row.append(MatrixBuilder.calculateDistance(point1[0], point1[1], point2[0], point2[1]))
             matrix.append(row)
+        return points 
 
     @staticmethod
     def populateRandomMatrix(matrix, size):
