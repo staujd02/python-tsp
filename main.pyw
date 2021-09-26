@@ -6,7 +6,7 @@ from source.utilities.graham_scan import GrahamScan
 from source.utilities.exclusion_generator import ExclusionGenerator 
 from source.utilities.matrix_builder import MatrixBuilder
 
-size = 50
+size = 5
 headers = []
 matrix = []
 points = MatrixBuilder.populateEuclideanMatrix(matrix, size)

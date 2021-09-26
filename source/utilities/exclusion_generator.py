@@ -1,18 +1,23 @@
 
 class ExclusionGenerator(object):
-
+   
    @staticmethod
-   def generateExclusionList(hullList):
+   def generateExclusionDictionary(hullList):
+        exclusionDictonary = {}
         exclusionList = []
         guidList = ExclusionGenerator.__getIdentifiers(hullList)
         for (idx, val) in enumerate(guidList):
             if idx == 0:
+                exclusionDictonary[val] = guidList[idx+2:-1]
                 exclusionList = exclusionList + list(map(lambda uuid: [val, uuid], guidList[idx+2:-1]))
             elif idx < len(guidList) - 2:
-                exclusionList = exclusionList + list(map(lambda uuid: [val, uuid], guidList[idx+2:]))
+                exclusionDictonary[val] = guidList[idx+2:]
+                exclusionList =  exclusionList + list(map(lambda uuid: [val, uuid], guidList[idx+2:]))
             else:
-                break
-        return exclusionList + list(map(lambda uuidPair: [uuidPair[1], uuidPair[0]],exclusionList))
+                exclusionDictonary[val] = []
+        for (idx, uuidPair) in enumerate(exclusionList):
+            exclusionDictonary[uuidPair[1]].append(uuidPair[0])
+        return exclusionDictonary
 
    @staticmethod
    def __getIdentifiers(hull):

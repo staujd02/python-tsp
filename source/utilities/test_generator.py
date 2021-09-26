@@ -19,7 +19,7 @@ class TestGenerator(object):
         matrix = []
         points = MatrixBuilder.populateEuclideanMatrix(matrix, size)
         hullList = GrahamScan.getConvexHull(points)
-        exclusionList = ExclusionGenerator.generateExclusionList(hullList)
+        exclusionList = ExclusionGenerator.generateExclusionDictionary(hullList)
         (zeroGraph, vectorList) = Transformer(matrix, self.getHeaders(size), exclusionList).fetchSolvePieces()
         (vList, runTime) = Timer.time("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList), True)
         print(vList)
