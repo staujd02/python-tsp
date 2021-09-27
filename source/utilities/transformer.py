@@ -10,6 +10,15 @@ class Transformer(object):
         self.headers = matrixHeaders
         self.exclusionList = exclusionList 
 
+    def __excluded(self, val):
+        return False
+        # if val[1] in self.exclusionList.keys():
+        #     return val[2] in self.exclusionList[val[1]]
+        # elif val[2] in self.exclusionList.keys():
+        #     return val[1] in self.exclusionList[val[2]]
+        # else:
+        #     False
+
     def fetchSolvePieces(self):
         zeroVectors = []
         vectorHeap = []
@@ -19,7 +28,7 @@ class Transformer(object):
             column = []
             for rowIdx in range(0, len(self.matrix)):
                 val = self.matrix[rowIdx][idx]
-                if val is not None:
+                if val is not None and not self.__excluded(val):
                     column.append(Vector(header, self.headers[rowIdx], val[0]))
             column.sort(key=self.sortThird)
             v = column.pop(0)

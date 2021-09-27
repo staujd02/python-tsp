@@ -6,17 +6,15 @@ from source.utilities.graham_scan import GrahamScan
 from source.utilities.exclusion_generator import ExclusionGenerator 
 from source.utilities.matrix_builder import MatrixBuilder
 
-size = 5
-headers = []
-matrix = []
-points = MatrixBuilder.populateEuclideanMatrix(matrix, size)
-hullList = GrahamScan.getConvexHull(points)
-exclusionList = ExclusionGenerator.generateExclusionList(hullList)
-print(exclusionList)
+# size = 5
+# headers = []
+# matrix = []
+# points = MatrixBuilder.populateEuclideanMatrix(matrix, size)
+# print(matrix)
 
-# testGen = TestGenerator()
+seed(5)
+testGen = TestGenerator()
 # testGen.runTest(10)
-# seed(5)
 # testGen.runIterationTest(5, 10)
 # for i in range(5):
 #     seed(i)
@@ -26,5 +24,4 @@ print(exclusionList)
 #     print("Classical:")
 #     testGen.runClassicalTest(15)
 #     print("")
-
-# testGen.runSuite([4, 5, 6], 4)
+testGen.runSuite([8], 20)
