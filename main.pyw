@@ -24,4 +24,9 @@ testGen = TestGenerator()
 #     print("Classical:")
 #     testGen.runClassicalTest(15)
 #     print("")
-testGen.runSuite([8], 20)
+testGen.runVerificationSuite([9, 10], 5)
+
+# myList = ['dog', 'cat', 'bird', 'cow']
+# hullList = ['dog', 'cow']
+# myList = list(filter(lambda x: x in hullList, myList))
+# print(myList)

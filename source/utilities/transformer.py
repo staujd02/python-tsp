@@ -11,13 +11,12 @@ class Transformer(object):
         self.exclusionList = exclusionList 
 
     def __excluded(self, val):
-        return False
         # if val[1] in self.exclusionList.keys():
         #     return val[2] in self.exclusionList[val[1]]
         # elif val[2] in self.exclusionList.keys():
         #     return val[1] in self.exclusionList[val[2]]
         # else:
-        #     False
+        return False
 
     def fetchSolvePieces(self):
         zeroVectors = []
