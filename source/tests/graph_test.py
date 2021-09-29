@@ -1,3 +1,5 @@
+from array import array
+from source.utilities.graphStringMuxer import GraphStringMuxer
 import unittest
 
 from source.utilities.solver import Solver
@@ -37,20 +39,27 @@ class Graph_test(unittest.TestCase):
         self.assertEqual(str(graph), str(graph.copy()))
         self.assertEqual(graph.lastChange, graph.copy().lastChange)
     
+    def test_a_graph_can_fill_out_its_trajectory_register(self):
+        V = self.V
+        graph = Graph(['A->B', 'B->D', 'C->B', 'D->A'], V)
+        self.assertEqual(graph.trajectoryRegister, array('i', [1, 2, 0, 1]))
+    
     def test_a_graph_can_translate_an_ascii_key_to_an_index(self):
         V = self.V
         graph = Graph(['A->B', 'B->D', 'C->B', 'D->A'], V)
-        self.assertEqual(graph.translate('A'), 0)
-        self.assertEqual(graph.translate('C'), 2)
+        self.assertEqual(GraphStringMuxer.translate('A'), 0)
+        self.assertEqual(GraphStringMuxer.translate('C'), 2)
     
     def test_a_graph_can_go_deeper(self):
         V = self.V
         graph = Graph(['A->B', 'B->D', 'C->B', 'D->A'], V)
+        self.assertEqual(graph.trajectoryRegister, array('i', [1, 2, 0, 1]))
         w = graph.getWeight()
         newWeight = graph.goDeeper(V['D->B'], w)
         self.assertEqual(newWeight, w + V['D->B'][2])
-        self.assertEqual(graph.data[3], 'D->B')
+        self.assertEqual(graph.graphData[3], 'D->B')
         self.assertEqual(graph.lastChange, 'D->A')
+        self.assertEqual(graph.trajectoryRegister, array('i', [0, 3, 0, 1]))
     
     def test_a_graph_can_go_across(self):
         V = self.V
@@ -59,8 +68,8 @@ class Graph_test(unittest.TestCase):
         graph.replace(V['D->C'])
         newWeight = graph.goAcross(V['E->C'], V['D->C'][2])
         expectedNewWeight = V['E->C'][2]
-        self.assertEqual(graph.data[4], 'E->C')
-        self.assertEqual(graph.data[3], 'D->A')
+        self.assertEqual(graph.graphData[4], 'E->C')
+        self.assertEqual(graph.graphData[3], 'D->A')
         self.assertEqual(graph.lastChange, 'E->A')
         self.assertEqual(newWeight, expectedNewWeight)
     

@@ -22,7 +22,7 @@ class Transformer_test(unittest.TestCase):
     def test_transformer_prepare_matrix_for_solving(self):
         (zeroVectors, remaining) = self.transformer.fetchSolvePieces()
         for (idx, v) in enumerate([Vector('A', 'E', 0), Vector('B', 'A', 0), Vector('C', 'E', 0), Vector('D', 'A', 0), Vector('E', 'A', 0)]):
-            self.vectorKeyCompare(zeroVectors.data[idx], v)
+            self.vectorKeyCompare(zeroVectors.graphData[idx], v)
         for (idx, v) in enumerate([
             Vector('D','E', 5),
             Vector('C','D', 25),

@@ -29,7 +29,7 @@ class TestGenerator(object):
             exclusionList = {}
         (zeroGraph, vectorList) = Transformer(matrix, self.getHeaders(size), exclusionList).fetchSolvePieces()
         (vList, runTime) = Timer.time("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList), True)
-        # print(vList)
+        print(vList)
         return runTime
     
     @staticmethod

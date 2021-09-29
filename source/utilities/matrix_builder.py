@@ -9,6 +9,10 @@ class MatrixBuilder(object):
         points = []
         for i in range(size):
             points.append([MatrixBuilder.getRand(0, 1000), MatrixBuilder.getRand(0, 1000), uuid4()])
+        return MatrixBuilder.populateEuclideanMatrixFromPoints(matrix, points) 
+    
+    @staticmethod
+    def populateEuclideanMatrixFromPoints(matrix, points):
         for (idx, point1) in enumerate(points):
             row = []
             for (jdx, point2) in enumerate(points):

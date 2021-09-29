@@ -1,4 +1,5 @@
 from queue import PriorityQueue
+from source.utilities.trajectoryCounts import TrajectoryCounts
 
 from source.dataStructures import Vector, Step, GraphStep
 from source.utilities.graph import Graph
@@ -7,7 +8,7 @@ from time import time
 
 class Solver(object):
     
-    def solve(self, zeroGraph, vectors):
+    def solve(self, zeroGraph: Graph, vectors):
         queue = PriorityQueue()
         graph = zeroGraph.copy()
         graph.replace(vectors[0])
@@ -32,9 +33,9 @@ class Solver(object):
                 v = vectors[pop.idx]
                 if pop.graph.getWeight() >= runningWeight:
                     runningWeight = pop.graph.getWeight()
+                    self.goGraphDeep(v, pop, weight, queue)
                 # TIME BLOCK
                 # start = time()
-                    self.goGraphDeep(v, pop, weight, queue)
                 # timeSpentGoingDeeper += time() - start
                 # TIME BLOCK
                 # TIME BLOCK
@@ -44,7 +45,6 @@ class Solver(object):
                 # TIME BLOCK
         return None
 
-    
     def goGraphAcross(self, v, pop, weight, queue):
         newWeight = pop.graph.goAcross(v, weight)
         queue.put((newWeight, GraphStep(pop.graph, pop.idx + 1)))
