@@ -14,9 +14,10 @@ class Graph(NoOpCompare):
             return
         self.graphData = []
         self.weight = 0
+        self.offendingIndex = 0
         self.lastChange = None
         self.vectorList = vectorList
-        self.trajectoryRegister = TrajectoryCounts.fillRegister(graphVectors)
+        # self.trajectoryRegister = TrajectoryCounts.fillRegister(graphVectors)
         charList = ''
         for v in graphVectors:
             vector = vectorList[v]
@@ -33,7 +34,8 @@ class Graph(NoOpCompare):
         g.weight = self.weight
         g.lastChange = self.lastChange
         g.vectorList = self.vectorList
-        g.trajectoryRegister = self.trajectoryRegister
+        # g.trajectoryRegister = self.trajectoryRegister
+        g.offendingIndex = self.offendingIndex
         return g
     
     def goAcross(self, vector: Vector, weight: int) -> int:
@@ -55,12 +57,14 @@ class Graph(NoOpCompare):
         v = self.graphData[i]
         self.lastChange = v
         self.weight += vector[2] - self.vectorList[v][2]
-        self.trajectoryRegister = TrajectoryCounts.createDeltaRegister(self.trajectoryRegister, v, vector)
+        # self.trajectoryRegister = TrajectoryCounts.createDeltaRegister(self.trajectoryRegister, v, vector)
         self.__assignVector(vector)
 
     def isValid(self) -> bool:
-        if not TrajectoryCounts.demonstratesConsistency(self.trajectoryRegister):
-            return False
+        # [consistent, offendingIndex] = TrajectoryCounts.demonstratesConsistency(self.trajectoryRegister)
+        # self.offendingIndex = offendingIndex
+        # if not consistent:
+        #     return False
         visited = {}
         start = self.graphData[0][0]
         beginning = start

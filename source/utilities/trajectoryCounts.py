@@ -3,7 +3,7 @@ import array as arr
 from source.dataStructures import Vector
 from source.utilities.graphStringMuxer import GraphStringMuxer
 
-from typing import List
+from typing import List, Union
 
 class TrajectoryCounts(object):
 
@@ -25,8 +25,14 @@ class TrajectoryCounts(object):
         return newRegister
     
     @staticmethod
-    def demonstratesConsistency(register) -> bool:
-        return register == arr.array('i', [1] * len(register))
+    def demonstratesConsistency(register, startIndex = 0) -> Union[bool, int]:
+        for idx in range(startIndex, len(register)):
+            if register[idx] != 1:
+                return [False, idx]
+        for idx in range(0, len(register) - (len(register) - startIndex)):
+            if register[idx] != 1:
+                return [False, idx]
+        return [True, startIndex]
 
     @staticmethod
     def __getDestinationIndex(vectorString: str) -> int:

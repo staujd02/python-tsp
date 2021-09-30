@@ -13,10 +13,12 @@ from source.utilities.matrix_builder import MatrixBuilder
 # points = MatrixBuilder.populateEuclideanMatrix(matrix, size)
 # print(matrix)
 
-seed(5)
+seed(2153649)
+
 testGen = TestGenerator()
-# testGen.runTest(10)
-testGen.runSuite([8,9], 5)
+testGen.runningExclusion = True
+testGen.runningTestExclusion= True
+testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
 # testGen.runIterationTest(5, 10)
 # for i in range(5):
 #     seed(i)
