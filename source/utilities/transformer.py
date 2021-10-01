@@ -29,8 +29,6 @@ class Transformer(object):
                 val = self.matrix[rowIdx][idx]
                 if val is not None and not self.__excluded(val):
                     column.append(Vector(header, self.headers[rowIdx], val[0]))
-                elif val is not None:
-                    print(Vector(header, self.headers[rowIdx], val[0]))
             column.sort(key=self.sortThird)
             v = column.pop(0)
             scale = v[2]

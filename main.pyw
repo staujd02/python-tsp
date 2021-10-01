@@ -18,7 +18,9 @@ seed(2153649)
 testGen = TestGenerator()
 testGen.runningExclusion = True
 testGen.runningTestExclusion= True
-testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
+testGen.runVerificationSuite([7, 8, 9, 10], 5)
+
+# testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
 # testGen.runIterationTest(5, 10)
 # for i in range(5):
 #     seed(i)
@@ -28,7 +30,6 @@ testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
 #     print("Classical:")
 #     testGen.runClassicalTest(15)
 #     print("")
-# testGen.runVerificationSuite([9, 10], 5)
 
 
 # points = [

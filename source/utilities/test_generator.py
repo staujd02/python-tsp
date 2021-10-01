@@ -15,23 +15,26 @@ from random import seed, random
 from source.utilities.matrix_builder import MatrixBuilder
 
 class TestGenerator(object):
-    runningExclusion = False
-    runningTestExclusion = False
-
-    def runTest(self, size, matrix, points):
-        if self.runningExclusion:
-            if self.runningTestExclusion:
-                exclusionList = ExclusionGenerator.generateExclusionDictionaryTrials(points)
-            else:
-                hullList = GrahamScan.getConvexHull(points)
-                exclusionList = ExclusionGenerator.generateExclusionDictionary(hullList)
-        else:
-            exclusionList = {}
-        (zeroGraph, vectorList) = Transformer(matrix, self.getHeaders(size), exclusionList).fetchSolvePieces()
+    
+    def createTest(self, matrix, points, exclusionGenerator):
+        exclusionList = exclusionGenerator(points)
+        (zeroGraph, vectorList) = Transformer(matrix, self.getHeaders(len(points)), exclusionList).fetchSolvePieces()
         (vList, runTime) = Timer.time("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList), True)
         print(vList)
         return runTime
     
+    def runDeepCutTest(self, matrix, points):
+        return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepCut)
+
+    def runTestInnerRingsExclusionTest(self, matrix, points):
+        return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryTrials)
+    
+    def runTestBasicExclusionTest(self, matrix, points):
+        return self.createTest(matrix, points, lambda pts: ExclusionGenerator.generateExclusionDictionary(GrahamScan.getConvexHull(pts)))
+    
+    def runTest(self, matrix, points):
+        return self.createTest(matrix, points, lambda _: {})
+
     @staticmethod
     def getHeaders(size):
         headers = []
@@ -72,7 +75,7 @@ class TestGenerator(object):
             for i in range(iterations):
                 matrix = []
                 points = MatrixBuilder.populateEuclideanMatrix(matrix, x)
-                trials.append(self.runTest(x, matrix, points))
+                trials.append(self.runDeepCutTest(x, matrix, points))
             self.printStats(trials)
             print("=================")
         print("Trials Complete.")
@@ -85,27 +88,20 @@ class TestGenerator(object):
                 matrix = []
                 points = MatrixBuilder.populateEuclideanMatrix(matrix, x)
                 matrixesWithPoints.append([matrix, points])
-
-            self.runningExclusion = True
-            self.runningTestExclusion = False
-            self.runTrialWithPrepopulatedMatrix("Trial With Outer Hull Elimination: ", matrixesWithPoints, x)
-
-            self.runningExclusion = True
-            self.runningTestExclusion = True
-            self.runTrialWithPrepopulatedMatrix("Trial With Expansive Hull Elimination: ", matrixesWithPoints, x)
-           
-            self.runningExclusion = False
-            self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrixesWithPoints, x)
+            self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrixesWithPoints, x, self.runTest)
+            self.runTrialWithPrepopulatedMatrix("Trial With Outside Hull Elimination: ", matrixesWithPoints, x, self.runTestBasicExclusionTest)
+            self.runTrialWithPrepopulatedMatrix("Trial With Inner Rings Hull Elimination: ", matrixesWithPoints, x, self.runTestInnerRingsExclusionTest)
+            self.runTrialWithPrepopulatedMatrix("Trial With Deep Elimination: ", matrixesWithPoints, x, self.runDeepCutTest)
         print("=================")
         print("Trials Complete.")
 
-    def runTrialWithPrepopulatedMatrix(self, title, matrixesWithPoints, size):
+    def runTrialWithPrepopulatedMatrix(self, title, matrixesWithPoints, size, test):
         print("=================")
         print(title + str(size))
         print("=================")
         trials = []
         for [matrix, points] in matrixesWithPoints:
-            trials.append(self.runTest(size, matrix, points))
+            trials.append(test(matrix, points))
         self.printStats(trials)
         
     def printStats(self, trials):
