@@ -69,6 +69,34 @@ class ExclusionGenerator(object):
                                     if val not in exclusions[key]:
                                         exclusions[key].append(val)
        return exclusions
+   
+   @staticmethod
+   def generateExclusionDictionaryDeepWebCut(points):
+       myList = deepcopy(points)
+       exclusions = {}
+       listOfHullsLists = []
+       while(len(myList) > 2):
+            hullList = GrahamScan.getConvexHull(myList)
+            myList = list(filter(lambda x: x not in hullList, myList))
+            listOfHullsLists.append(deepcopy(hullList))
+            if len(hullList) > 3:
+                exclusions.update(ExclusionGenerator.generateExclusionDictionary(hullList))
+       for [idx, hullList] in enumerate(listOfHullsLists):
+           if idx == len(listOfHullsLists) - 1:
+               break
+           for pt in hullList:
+               for interiorHull in listOfHullsLists[idx+1:]:
+                    deepCut = GrahamScan.getConvexHull([pt] + interiorHull)
+                    if len(deepCut) > 3:
+                        exclusionDictonary = ExclusionGenerator.generateExclusionDictionary(deepCut)
+                        for idx, (key, destinationList) in enumerate(exclusionDictonary.items()):
+                            if key not in exclusions:
+                                exclusions[key] = destinationList
+                            else:
+                                for val in destinationList:
+                                    if val not in exclusions[key]:
+                                        exclusions[key].append(val)
+       return exclusions
 
    @staticmethod
    def __getIdentifiers(hull):

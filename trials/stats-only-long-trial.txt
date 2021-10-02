@@ -1,0 +1,45 @@
+Begining Trials...
+=================
+Trial With Deep Web Elimination: 4
+=================
+Average: 0.00016791105270385742
+Median: 0.0
+Variance: 2.4652846046308244e-06
+=================
+Trial With Deep Web Elimination: 5
+=================
+Average: 0.0015617537498474122
+Median: 0.0
+Variance: 2.1951684607819288e-05
+=================
+Trial With Deep Web Elimination: 6
+=================
+Average: 0.011584784984588623
+Median: 0.013962745666503906
+Variance: 0.00024344578401825745
+=================
+Trial With Deep Web Elimination: 7
+=================
+Average: 0.07717024564743041
+Median: 0.04686009883880615
+Variance: 0.00762599700822131
+=================
+Trial With Deep Web Elimination: 8
+=================
+Average: 0.5472490191459656
+Median: 0.2358015775680542
+Variance: 3.497271930649803
+=================
+Trial With Deep Web Elimination: 9
+=================
+Average: 3.4663433694839476
+Median: 1.2611688375473022
+Variance: 41.55268772810584
+=================
+Trial With Deep Web Elimination: 10
+=================
+Average: 22.610875017642975
+Median: 8.347481846809387
+Variance: 3980.751132817019
+=================
+Trials Complete.

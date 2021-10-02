@@ -23,6 +23,9 @@ class TestGenerator(object):
         print(vList)
         return runTime
     
+    def runDeepWebCutTest(self, matrix, points):
+        return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepWebCut)
+    
     def runDeepCutTest(self, matrix, points):
         return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepCut)
 
@@ -88,10 +91,11 @@ class TestGenerator(object):
                 matrix = []
                 points = MatrixBuilder.populateEuclideanMatrix(matrix, x)
                 matrixesWithPoints.append([matrix, points])
-            self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrixesWithPoints, x, self.runTest)
-            self.runTrialWithPrepopulatedMatrix("Trial With Outside Hull Elimination: ", matrixesWithPoints, x, self.runTestBasicExclusionTest)
-            self.runTrialWithPrepopulatedMatrix("Trial With Inner Rings Hull Elimination: ", matrixesWithPoints, x, self.runTestInnerRingsExclusionTest)
-            self.runTrialWithPrepopulatedMatrix("Trial With Deep Elimination: ", matrixesWithPoints, x, self.runDeepCutTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrixesWithPoints, x, self.runTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With Outside Hull Elimination: ", matrixesWithPoints, x, self.runTestBasicExclusionTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With Inner Rings Hull Elimination: ", matrixesWithPoints, x, self.runTestInnerRingsExclusionTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With Deep Elimination: ", matrixesWithPoints, x, self.runDeepCutTest)
+            self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTest)
         print("=================")
         print("Trials Complete.")
 

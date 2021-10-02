@@ -13,12 +13,19 @@ from source.utilities.matrix_builder import MatrixBuilder
 # points = MatrixBuilder.populateEuclideanMatrix(matrix, size)
 # print(matrix)
 
+# thing to beat O(1.9^{n})
+
+# Found Issue..?
+# Weights are different but the solution is the same?
+# ... maybe the zero graph is different
+# seed(2153649) => 2 Trial in 10 Suite
+
 seed(2153649)
 
+# testGen.runVerificationSuite([7, 8, 9, 10], 5)
+
 testGen = TestGenerator()
-testGen.runningExclusion = True
-testGen.runningTestExclusion= True
-testGen.runVerificationSuite([7, 8, 9, 10], 5)
+testGen.runVerificationSuite([4, 5, 6, 7, 8, 9, 10], 100)
 
 # testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
 # testGen.runIterationTest(5, 10)
@@ -44,7 +51,7 @@ testGen.runVerificationSuite([7, 8, 9, 10], 5)
 # ]
 # matrix = []
 # points = MatrixBuilder.populateEuclideanMatrixFromPoints(matrix, points)
-# testGen.runTrialWithPrepopulatedMatrix("Test Run - Size: ", [[matrix, points]], 8)
+# testGen.runTrialWithPrepopulatedMatrix("Test Run - Size: ", [[matrix, points]], 8, testGen.runDeepWebCutTest)
 # myList = ['dog', 'cat', 'bird', 'cow']
 # hullList = ['dog', 'cow']
 # myList = list(filter(lambda x: x in hullList, myList))
