@@ -23,14 +23,17 @@ class TestGenerator(object):
         print(vList)
         return runTime
     
+    def runDeepWebCutTestWithWindows(self, matrix, points):
+        return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepWebCutWithWindows)
+    
     def runDeepWebCutTest(self, matrix, points):
         return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepWebCut)
     
     def runDeepCutTest(self, matrix, points):
-        return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepCut)
+        return self.createTest(matrix, points, ExclusionGenerator.generateExclusionsWithDeepCutsAroundHullRings)
 
     def runTestInnerRingsExclusionTest(self, matrix, points):
-        return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryTrials)
+        return self.createTest(matrix, points, ExclusionGenerator.generateExclusionsByHullRings)
     
     def runTestBasicExclusionTest(self, matrix, points):
         return self.createTest(matrix, points, lambda pts: ExclusionGenerator.generateExclusionDictionary(GrahamScan.getConvexHull(pts)))
@@ -96,6 +99,7 @@ class TestGenerator(object):
             # self.runTrialWithPrepopulatedMatrix("Trial With Inner Rings Hull Elimination: ", matrixesWithPoints, x, self.runTestInnerRingsExclusionTest)
             # self.runTrialWithPrepopulatedMatrix("Trial With Deep Elimination: ", matrixesWithPoints, x, self.runDeepCutTest)
             self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTest)
+            self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Window Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTestWithWindows)
         print("=================")
         print("Trials Complete.")
 

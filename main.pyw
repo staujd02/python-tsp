@@ -1,3 +1,4 @@
+from copy import deepcopy
 from random import seed
 from uuid import uuid4
 
@@ -25,7 +26,7 @@ seed(2153649)
 # testGen.runVerificationSuite([7, 8, 9, 10], 5)
 
 testGen = TestGenerator()
-testGen.runVerificationSuite([4, 5, 6, 7, 8, 9, 10], 100)
+testGen.runVerificationSuite([9, 10], 10)
 
 # testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
 # testGen.runIterationTest(5, 10)
@@ -51,7 +52,9 @@ testGen.runVerificationSuite([4, 5, 6, 7, 8, 9, 10], 100)
 # ]
 # matrix = []
 # points = MatrixBuilder.populateEuclideanMatrixFromPoints(matrix, points)
-# testGen.runTrialWithPrepopulatedMatrix("Test Run - Size: ", [[matrix, points]], 8, testGen.runDeepWebCutTest)
+# exclusion = ExclusionGenerator.generateExclusionDictionaryDeepWebCutWithWindows(deepcopy(points))
+# print(exclusion)
+# testGen.runTrialWithPrepopulatedMatrix("Test Run - Size: ", [[matrix, points]], 8, testGen.runDeepWebCutTestWithWindows)
 # myList = ['dog', 'cat', 'bird', 'cow']
 # hullList = ['dog', 'cow']
 # myList = list(filter(lambda x: x in hullList, myList))

@@ -131,11 +131,12 @@ class Transformer_test(unittest.TestCase):
     def setUp(self):
         self.headers = ['A', 'B', 'C', 'D', 'E']
         self.test = [
-            [None, 100,  250,   75,   50],
-            [100,  None, 300,  175,  200],
-            [250,  300,  None, 150,  125],
-            [75,  175,  150,  None,  80],
-            [50,  200,  125,   80,  None]
+            [['A', 'A', None], ['A', 'B',  100], ['A', 'C',  250], ['A', 'D',   75],  ['A', 'E',   50]],
+            [['B', 'A',  100], ['B', 'B', None], ['B', 'C',  300], ['B', 'D',  175],  ['B', 'E',  200]],
+            [['C', 'A',  250], ['C', 'B',  300], ['C', 'C', None], ['C', 'D',  150],  ['C', 'E',  125]],
+            [['D', 'A',   75], ['D', 'B',  175], ['D', 'C',  150], ['D', 'D', None],  ['D', 'E',   80]],
+            [['E', 'A',   50], ['E', 'B',  200], ['E', 'C',  125], ['E', 'D',   80],  ['E', 'E', None]]
         ]
+        # This lambda needs fixed:
         self.test = list(map(lambda t: list(map(lambda r: None if r == None else [r, 'Ignore'], t)), self.test))
         self.transformer = Transformer(self.test, self.headers, {'Ignore': []})
