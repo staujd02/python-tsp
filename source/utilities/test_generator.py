@@ -3,6 +3,7 @@ import time
 import string
 from copy import deepcopy
 
+from source.benchmarks.numpy_solver import solve_opttour
 from source.utilities.transformer import Transformer
 from source.utilities.solver import Solver
 from source.dataStructures import Vector
@@ -14,30 +15,32 @@ from source.utilities.exclusion_generator import ExclusionGenerator
 from random import seed, random
 from source.utilities.matrix_builder import MatrixBuilder
 
+
 class TestGenerator(object):
-    
+
     def createTest(self, matrix, points, exclusionGenerator):
         exclusionList = exclusionGenerator(points)
         (zeroGraph, vectorList) = Transformer(matrix, self.getHeaders(len(points)), exclusionList).fetchSolvePieces()
-        (vList, runTime) = Timer.time("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList), True)
+        (vList, runTime) = Timer.get_timed_result("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList))
         print(vList)
         return runTime
-    
+
     def runDeepWebCutTestWithWindows(self, matrix, points):
         return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepWebCutWithWindows)
-    
+
     def runDeepWebCutTest(self, matrix, points):
         return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepWebCut)
-    
+
     def runDeepCutTest(self, matrix, points):
         return self.createTest(matrix, points, ExclusionGenerator.generateExclusionsWithDeepCutsAroundHullRings)
 
     def runTestInnerRingsExclusionTest(self, matrix, points):
         return self.createTest(matrix, points, ExclusionGenerator.generateExclusionsByHullRings)
-    
+
     def runTestBasicExclusionTest(self, matrix, points):
-        return self.createTest(matrix, points, lambda pts: ExclusionGenerator.generateExclusionDictionary(GrahamScan.getConvexHull(pts)))
-    
+        return self.createTest(matrix, points, lambda pts: ExclusionGenerator.generateExclusionDictionary(
+            GrahamScan.getConvexHull(pts)))
+
     def runTest(self, matrix, points):
         return self.createTest(matrix, points, lambda _: {})
 
@@ -52,13 +55,13 @@ class TestGenerator(object):
             else:
                 headers.append(alphabet[idx % lastIndex] + str(idx // lastIndex))
         return headers
-    
+
     def runClassicalTest(self, size):
         matrix = []
         MatrixBuilder.populateEuclideanMatrix(matrix, size)
         (zeroGraph, vectorList) = Transformer(matrix, self.headers[:size]).fetchSolvePieces()
-        print(Timer.time("Run Time: ", lambda: Solver().oldSolve(zeroGraph, vectorList)))
-    
+        print(Timer.time_execution("Run Time: ", lambda: Solver().oldSolve(zeroGraph, vectorList)))
+
     def runIterationTest(self, size, depth):
         matrix = []
         MatrixBuilder.populateEuclideanMatrix(matrix, size)
@@ -70,7 +73,7 @@ class TestGenerator(object):
                 w += v[2]
                 s += str(v)
             print(s + ']: ' + str(w))
-    
+
     def runSuite(self, trialList, iterations):
         print("Begining Trials...")
         print("=================")
@@ -87,19 +90,28 @@ class TestGenerator(object):
         print("Trials Complete.")
 
     def runVerificationSuite(self, trialList, iterations):
-        print("Begining Trials...")
-        for x in trialList:
-            matrixesWithPoints = []
-            for i in range(iterations):
+        print("Preparing Trials...")
+        trials = []
+        for size_of_matrix in trialList:
+            matrices_with_points = []
+            for _ in range(iterations):
                 matrix = []
-                points = MatrixBuilder.populateEuclideanMatrix(matrix, x)
-                matrixesWithPoints.append([matrix, points])
-            # self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrixesWithPoints, x, self.runTest)
-            # self.runTrialWithPrepopulatedMatrix("Trial With Outside Hull Elimination: ", matrixesWithPoints, x, self.runTestBasicExclusionTest)
-            # self.runTrialWithPrepopulatedMatrix("Trial With Inner Rings Hull Elimination: ", matrixesWithPoints, x, self.runTestInnerRingsExclusionTest)
-            # self.runTrialWithPrepopulatedMatrix("Trial With Deep Elimination: ", matrixesWithPoints, x, self.runDeepCutTest)
-            self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTest)
-            self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Window Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTestWithWindows)
+                points = MatrixBuilder.populateEuclideanMatrix(matrix, size_of_matrix)
+                matrices_with_points.append([matrix, points])
+                solve_opttour(matrix, size_of_matrix)
+            trials.append([matrices_with_points, size_of_matrix])
+        print("Running Trials...")
+        for [matrix, n] in trials:
+            # self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrix, n, self.runTest)
+            self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrix, n, self.runTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With Outside Hull Elimination: ", matrix, n,
+            #                                     self.runTestBasicExclusionTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With Inner Rings Hull Elimination: ", t, n,
+            #                                     self.runTestInnerRingsExclusionTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With Deep Elimination: ", t, n, self.runDeepCutTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Elimination: ", t, n, self.runDeepWebCutTest)
+            # self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Window Elimination: ", t, n,
+            #                                     self.runDeepWebCutTestWithWindows)
         print("=================")
         print("Trials Complete.")
 
@@ -111,10 +123,9 @@ class TestGenerator(object):
         for [matrix, points] in matrixesWithPoints:
             trials.append(test(matrix, points))
         self.printStats(trials)
-        
+
     def printStats(self, trials):
         mean = statistics.mean(trials)
         print("Average: " + str(mean))
         print("Median: " + str(statistics.median(trials)))
         print("Variance: " + str(statistics.pvariance(trials, mean)))
-    
