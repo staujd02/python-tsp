@@ -45,7 +45,7 @@ class Transformer(object):
         try:
             while True:
                 v = heapq.heappop(vectorHeap)
-                vectorList.append(v)        
+                vectorList.append(v)
         except:
             pass
         return (Graph(zeroVectors, vectorDict), vectorList)

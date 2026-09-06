@@ -21,12 +21,19 @@ from source.utilities.matrix_builder import MatrixBuilder
 # ... maybe the zero graph is different
 # seed(2153649) => 2 Trial in 10 Suite
 
-seed(2153649)
+seed(2553649)
 
 # testGen.runVerificationSuite([7, 8, 9, 10], 5)
 
 testGen = TestGenerator()
-testGen.runVerificationSuite([9, 10], 10)
+# testGen.runVerificationSuite([9, 10], 10)
+testGen.runVerificationSuite([8], 100)
+
+# ['A->C', 'B->D', 'C->A', 'D->B', 'E->H', 'F->H', 'G->C', 'H->F']
+# ['A->C', 'B->D', 'C->A', 'D->B', 'E->H', 'F->H', 'G->C', 'H->F']
+
+# Deep Web       :(A->E->H->F->D->B->G->C->A): 1272
+# Deep Web Window:(A->C->G->B->D->F->H->E->A): 1272
 
 # testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
 # testGen.runIterationTest(5, 10)
@@ -59,3 +66,52 @@ testGen.runVerificationSuite([9, 10], 10)
 # hullList = ['dog', 'cow']
 # myList = list(filter(lambda x: x in hullList, myList))
 # print(myList)
+# A =  (908, 31)
+# B = (968, 369)
+# C = (24, 470)
+# D = (16, 304)
+# E = (620, 498)
+# F = (703, 542)
+# G = (901, 14)
+# H = (662, 403)
+# I = (556, 440)
+ 
+ 
+# A->G->H->I->D->C->E->F->B->A
+
+# # Bad Sol. 2
+#  908, 31 
+#  901, 14
+#  662, 403
+#  556, 440
+#  16, 304
+#  24, 470
+#  620, 498
+#  703, 542
+#  968, 369 
+#  908, 31 
+
+#  {
+#  'D': ['A', 'B', 'F', 'E'],
+#  'G': ['B', 'F', 'C', 'E'],
+#  'A': ['F', 'C', 'D', 'I', 'E'],
+#  'B': ['C', 'D', 'G', 'I', 'E'],
+#  'F': ['D', 'G', 'A', 'I', 'H'],
+#  'C': ['G', 'A', 'B', 'H'],
+#  'H': ['C', 'E', 'F'],
+#  'E': ['D', 'G', 'A', 'H', 'B'],
+#  'I': ['A', 'B', 'F']
+#  }
+
+#  # Right Sol. 1
+#  A->G->D->C->I->E->F->H->B->A
+
+#  908, 31 
+#  901, 14
+#  16, 304
+#  24, 470
+#  556, 440
+#  620, 498
+#  703, 542
+#  662, 403
+#  968, 369 

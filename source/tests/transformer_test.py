@@ -137,6 +137,5 @@ class Transformer_test(unittest.TestCase):
             [['D', 'A',   75], ['D', 'B',  175], ['D', 'C',  150], ['D', 'D', None],  ['D', 'E',   80]],
             [['E', 'A',   50], ['E', 'B',  200], ['E', 'C',  125], ['E', 'D',   80],  ['E', 'E', None]]
         ]
-        # This lambda needs fixed:
-        self.test = list(map(lambda t: list(map(lambda r: None if r == None else [r, 'Ignore'], t)), self.test))
+        self.test = list(map(lambda t: list(map(lambda r: None if r[2] is None else [r[2], r[0], r[1]], t)), self.test))
         self.transformer = Transformer(self.test, self.headers, {'Ignore': []})

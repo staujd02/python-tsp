@@ -1,0 +1,574 @@
+Begining Trials...
+=================
+Trial With No Hull Elimination: 8
+=================
+['A->H', 'B->F', 'C->E', 'D->B', 'E->C', 'F->B', 'G->H', 'H->A']
+Run Time: 0.21869754791259766
+['A->B', 'B->D', 'C->H', 'D->B', 'E->D', 'F->C', 'G->D', 'H->C']
+Run Time: 1.0844230651855469
+['A->C', 'B->D', 'C->A', 'D->B', 'E->H', 'F->H', 'G->C', 'H->F']
+Run Time: 0.9701769351959229
+['A->H', 'B->F', 'C->E', 'D->F', 'E->C', 'F->D', 'G->E', 'H->D']
+Run Time: 0.3010828495025635
+['A->E', 'B->G', 'C->G', 'D->F', 'E->A', 'F->D', 'G->B', 'H->B']
+Run Time: 0.20533204078674316
+['A->H', 'B->G', 'C->G', 'D->H', 'E->D', 'F->C', 'G->C', 'H->A']
+Run Time: 0.8331277370452881
+['A->E', 'B->G', 'C->E', 'D->F', 'E->A', 'F->D', 'G->B', 'H->F']
+Run Time: 0.3886537551879883
+['A->G', 'B->E', 'C->E', 'D->F', 'E->B', 'F->D', 'G->B', 'H->G']
+Run Time: 0.36107683181762695
+['A->C', 'B->G', 'C->A', 'D->F', 'E->G', 'F->H', 'G->B', 'H->F']
+Run Time: 1.0365939140319824
+['A->D', 'B->F', 'C->D', 'D->C', 'E->A', 'F->B', 'G->H', 'H->G']
+Run Time: 0.5488700866699219
+['A->B', 'B->G', 'C->H', 'D->E', 'E->D', 'F->C', 'G->B', 'H->A']
+Run Time: 0.4033010005950928
+['A->F', 'B->C', 'C->B', 'D->H', 'E->G', 'F->A', 'G->E', 'H->D']
+Run Time: 0.14633965492248535
+['A->F', 'B->F', 'C->G', 'D->G', 'E->D', 'F->A', 'G->C', 'H->C']
+Run Time: 0.6879544258117676
+['A->E', 'B->D', 'C->H', 'D->B', 'E->A', 'F->A', 'G->E', 'H->C']
+Run Time: 0.7771995067596436
+['A->H', 'B->G', 'C->E', 'D->E', 'E->D', 'F->D', 'G->E', 'H->A']
+Run Time: 0.7552642822265625
+['A->E', 'B->A', 'C->G', 'D->H', 'E->F', 'F->E', 'G->C', 'H->D']
+Run Time: 0.8379132747650146
+['A->H', 'B->C', 'C->B', 'D->F', 'E->G', 'F->D', 'G->E', 'H->A']
+Run Time: 0.5568811893463135
+['A->B', 'B->D', 'C->F', 'D->B', 'E->F', 'F->E', 'G->H', 'H->G']
+Run Time: 2.1022846698760986
+['A->H', 'B->E', 'C->B', 'D->E', 'E->B', 'F->D', 'G->E', 'H->A']
+Run Time: 0.5256247520446777
+['A->D', 'B->D', 'C->F', 'D->B', 'E->G', 'F->C', 'G->E', 'H->B']
+Run Time: 0.7058076858520508
+['A->F', 'B->D', 'C->E', 'D->B', 'E->F', 'F->E', 'G->B', 'H->A']
+Run Time: 12.616204023361206
+['A->H', 'B->E', 'C->E', 'D->E', 'E->C', 'F->C', 'G->A', 'H->A']
+Run Time: 0.5181581974029541
+['A->G', 'B->A', 'C->H', 'D->G', 'E->G', 'F->G', 'G->A', 'H->C']
+Run Time: 0.8349125385284424
+['A->D', 'B->H', 'C->F', 'D->A', 'E->G', 'F->C', 'G->C', 'H->B']
+Run Time: 1.456463098526001
+['A->E', 'B->A', 'C->F', 'D->E', 'E->A', 'F->H', 'G->D', 'H->F']
+Run Time: 1.2158026695251465
+['A->F', 'B->D', 'C->G', 'D->B', 'E->B', 'F->B', 'G->C', 'H->D']
+Run Time: 7.304714918136597
+['A->F', 'B->E', 'C->G', 'D->E', 'E->B', 'F->A', 'G->C', 'H->E']
+Run Time: 0.2821061611175537
+['A->E', 'B->G', 'C->H', 'D->B', 'E->A', 'F->G', 'G->F', 'H->C']
+Run Time: 0.09372758865356445
+['A->F', 'B->H', 'C->D', 'D->F', 'E->D', 'F->D', 'G->B', 'H->B']
+Run Time: 1.06577730178833
+['A->H', 'B->F', 'C->F', 'D->E', 'E->C', 'F->B', 'G->B', 'H->F']
+Run Time: 7.548616647720337
+['A->G', 'B->E', 'C->E', 'D->A', 'E->B', 'F->H', 'G->A', 'H->F']
+Run Time: 0.8497428894042969
+['A->H', 'B->E', 'C->D', 'D->C', 'E->B', 'F->E', 'G->D', 'H->A']
+Run Time: 0.1718308925628662
+['A->B', 'B->A', 'C->D', 'D->C', 'E->G', 'F->A', 'G->E', 'H->D']
+Run Time: 0.10934972763061523
+['A->G', 'B->D', 'C->H', 'D->A', 'E->C', 'F->H', 'G->A', 'H->C']
+Run Time: 0.35872578620910645
+['A->H', 'B->E', 'C->H', 'D->E', 'E->D', 'F->G', 'G->F', 'H->C']
+Run Time: 0.18898916244506836
+['A->E', 'B->C', 'C->B', 'D->H', 'E->A', 'F->E', 'G->C', 'H->D']
+Run Time: 1.4925758838653564
+['A->H', 'B->D', 'C->G', 'D->B', 'E->C', 'F->A', 'G->H', 'H->G']
+Run Time: 0.4843311309814453
+['A->G', 'B->G', 'C->E', 'D->C', 'E->C', 'F->H', 'G->E', 'H->F']
+Run Time: 1.207648515701294
+['A->D', 'B->E', 'C->H', 'D->A', 'E->B', 'F->G', 'G->B', 'H->C']
+Run Time: 0.6094176769256592
+['A->B', 'B->A', 'C->B', 'D->G', 'E->G', 'F->H', 'G->E', 'H->F']
+Run Time: 2.8614211082458496
+['A->E', 'B->H', 'C->G', 'D->F', 'E->A', 'F->D', 'G->E', 'H->B']
+Run Time: 4.958388090133667
+['A->F', 'B->E', 'C->H', 'D->E', 'E->B', 'F->A', 'G->B', 'H->C']
+Run Time: 3.0686259269714355
+['A->H', 'B->E', 'C->E', 'D->F', 'E->B', 'F->D', 'G->B', 'H->C']
+Run Time: 0.23609089851379395
+['A->C', 'B->E', 'C->A', 'D->E', 'E->D', 'F->G', 'G->H', 'H->G']
+Run Time: 0.14676642417907715
+['A->E', 'B->D', 'C->H', 'D->B', 'E->A', 'F->C', 'G->A', 'H->C']
+Run Time: 0.1361088752746582
+['A->G', 'B->D', 'C->E', 'D->H', 'E->A', 'F->H', 'G->A', 'H->D']
+Run Time: 0.03985905647277832
+['A->B', 'B->A', 'C->G', 'D->G', 'E->A', 'F->H', 'G->D', 'H->F']
+Run Time: 0.5731263160705566
+['A->B', 'B->C', 'C->B', 'D->G', 'E->F', 'F->C', 'G->D', 'H->D']
+Run Time: 0.500866174697876
+['A->C', 'B->C', 'C->A', 'D->B', 'E->D', 'F->B', 'G->H', 'H->G']
+Run Time: 0.05419492721557617
+['A->G', 'B->E', 'C->H', 'D->E', 'E->B', 'F->E', 'G->B', 'H->D']
+Run Time: 0.4970269203186035
+['A->G', 'B->D', 'C->F', 'D->H', 'E->H', 'F->D', 'G->A', 'H->D']
+Run Time: 2.454604387283325
+['A->E', 'B->F', 'C->F', 'D->G', 'E->A', 'F->B', 'G->D', 'H->D']
+Run Time: 0.23520421981811523
+['A->B', 'B->A', 'C->A', 'D->H', 'E->H', 'F->D', 'G->H', 'H->E']
+Run Time: 0.8443617820739746
+['A->F', 'B->G', 'C->A', 'D->A', 'E->H', 'F->A', 'G->B', 'H->E']
+Run Time: 4.6893579959869385
+['A->C', 'B->F', 'C->B', 'D->F', 'E->B', 'F->D', 'G->H', 'H->G']
+Run Time: 0.5331945419311523
+['A->C', 'B->H', 'C->A', 'D->E', 'E->D', 'F->G', 'G->F', 'H->C']
+Run Time: 0.3785974979400635
+['A->C', 'B->F', 'C->A', 'D->H', 'E->D', 'F->B', 'G->H', 'H->D']
+Run Time: 0.9697854518890381
+['A->D', 'B->H', 'C->A', 'D->A', 'E->B', 'F->D', 'G->H', 'H->B']
+Run Time: 0.06248140335083008
+['A->D', 'B->H', 'C->G', 'D->E', 'E->D', 'F->B', 'G->C', 'H->B']
+Run Time: 0.015621662139892578
+['A->F', 'B->E', 'C->B', 'D->C', 'E->B', 'F->E', 'G->H', 'H->G']
+Run Time: 4.065816640853882
+['A->E', 'B->H', 'C->E', 'D->H', 'E->A', 'F->G', 'G->F', 'H->B']
+Run Time: 0.3915247917175293
+['A->G', 'B->E', 'C->D', 'D->E', 'E->D', 'F->A', 'G->A', 'H->G']
+Run Time: 1.7414705753326416
+['A->E', 'B->F', 'C->G', 'D->G', 'E->A', 'F->B', 'G->C', 'H->E']
+Run Time: 0.16445374488830566
+['A->C', 'B->G', 'C->A', 'D->H', 'E->B', 'F->G', 'G->F', 'H->D']
+Run Time: 0.29131221771240234
+['A->G', 'B->H', 'C->B', 'D->B', 'E->C', 'F->B', 'G->A', 'H->B']
+Run Time: 1.3045032024383545
+['A->G', 'B->C', 'C->B', 'D->A', 'E->F', 'F->E', 'G->A', 'H->E']
+Run Time: 0.5476417541503906
+['A->E', 'B->F', 'C->D', 'D->C', 'E->A', 'F->G', 'G->F', 'H->A']
+Run Time: 0.2911207675933838
+['A->G', 'B->E', 'C->F', 'D->A', 'E->H', 'F->C', 'G->B', 'H->E']
+Run Time: 0.24009442329406738
+['A->H', 'B->C', 'C->H', 'D->F', 'E->B', 'F->D', 'G->H', 'H->G']
+Run Time: 1.5000593662261963
+['A->H', 'B->E', 'C->F', 'D->G', 'E->B', 'F->C', 'G->D', 'H->A']
+Run Time: 0.21323013305664062
+['A->C', 'B->C', 'C->A', 'D->G', 'E->D', 'F->H', 'G->D', 'H->F']
+Run Time: 0.03271365165710449
+['A->E', 'B->H', 'C->E', 'D->H', 'E->A', 'F->G', 'G->F', 'H->D']
+Run Time: 0.14418888092041016
+['A->E', 'B->D', 'C->F', 'D->B', 'E->A', 'F->C', 'G->E', 'H->E']
+Run Time: 0.2343134880065918
+['A->B', 'B->A', 'C->D', 'D->C', 'E->B', 'F->G', 'G->H', 'H->G']
+Run Time: 0.03124260902404785
+['A->H', 'B->D', 'C->F', 'D->B', 'E->D', 'F->C', 'G->F', 'H->C']
+Run Time: 0.3463418483734131
+['A->C', 'B->H', 'C->G', 'D->F', 'E->F', 'F->E', 'G->C', 'H->B']
+Run Time: 1.9254992008209229
+['A->G', 'B->F', 'C->D', 'D->H', 'E->G', 'F->B', 'G->H', 'H->G']
+Run Time: 2.1811819076538086
+['A->B', 'B->A', 'C->F', 'D->A', 'E->B', 'F->G', 'G->F', 'H->G']
+Run Time: 0.031238317489624023
+['A->G', 'B->F', 'C->G', 'D->H', 'E->H', 'F->D', 'G->C', 'H->D']
+Run Time: 0.9889907836914062
+['A->C', 'B->G', 'C->A', 'D->C', 'E->G', 'F->D', 'G->E', 'H->B']
+Run Time: 0.2514312267303467
+['A->B', 'B->A', 'C->D', 'D->C', 'E->D', 'F->B', 'G->C', 'H->D']
+Run Time: 0.10935783386230469
+['A->H', 'B->C', 'C->D', 'D->C', 'E->F', 'F->H', 'G->A', 'H->F']
+Run Time: 1.7412559986114502
+['A->E', 'B->F', 'C->H', 'D->F', 'E->A', 'F->D', 'G->H', 'H->G']
+Run Time: 4.6495161056518555
+['A->C', 'B->H', 'C->A', 'D->F', 'E->C', 'F->D', 'G->F', 'H->B']
+Run Time: 0.9886374473571777
+['A->D', 'B->H', 'C->H', 'D->A', 'E->F', 'F->E', 'G->H', 'H->B']
+Run Time: 0.35581302642822266
+['A->B', 'B->A', 'C->E', 'D->F', 'E->F', 'F->D', 'G->D', 'H->B']
+Run Time: 0.5685865879058838
+['A->C', 'B->F', 'C->A', 'D->E', 'E->D', 'F->G', 'G->F', 'H->F']
+Run Time: 0.9970433712005615
+['A->B', 'B->A', 'C->F', 'D->H', 'E->G', 'F->C', 'G->E', 'H->D']
+Run Time: 0.769761323928833
+['A->C', 'B->F', 'C->A', 'D->H', 'E->D', 'F->D', 'G->E', 'H->D']
+Run Time: 0.34298181533813477
+['A->E', 'B->F', 'C->G', 'D->F', 'E->A', 'F->D', 'G->C', 'H->A']
+Run Time: 0.5311615467071533
+['A->C', 'B->D', 'C->A', 'D->C', 'E->H', 'F->B', 'G->D', 'H->E']
+Run Time: 0.031243324279785156
+['A->C', 'B->A', 'C->D', 'D->G', 'E->G', 'F->G', 'G->D', 'H->E']
+Run Time: 15.014054298400879
+['A->B', 'B->A', 'C->H', 'D->H', 'E->F', 'F->G', 'G->F', 'H->D']
+Run Time: 0.43622303009033203
+['A->E', 'B->D', 'C->F', 'D->B', 'E->A', 'F->C', 'G->D', 'H->E']
+Run Time: 0.6431272029876709
+['A->D', 'B->F', 'C->H', 'D->E', 'E->F', 'F->E', 'G->D', 'H->C']
+Run Time: 2.2807376384735107
+['A->B', 'B->A', 'C->F', 'D->A', 'E->G', 'F->C', 'G->C', 'H->G']
+Run Time: 9.464620590209961
+['A->D', 'B->F', 'C->D', 'D->A', 'E->A', 'F->D', 'G->C', 'H->F']
+Run Time: 1.9853837490081787
+['A->H', 'B->E', 'C->G', 'D->G', 'E->G', 'F->B', 'G->E', 'H->A']
+Run Time: 6.5829548835754395
+['A->E', 'B->C', 'C->B', 'D->C', 'E->A', 'F->E', 'G->H', 'H->E']
+Run Time: 0.3079407215118408
+['A->D', 'B->H', 'C->E', 'D->H', 'E->C', 'F->G', 'G->H', 'H->D']
+Run Time: 1.7303564548492432
+=================
+Trial With Deep Web Elimination: 8
+=================
+['A->H', 'B->F', 'C->E', 'D->B', 'E->C', 'F->B', 'G->H', 'H->A']
+Run Time: 0.1047213077545166
+['A->B', 'B->D', 'C->F', 'D->B', 'E->D', 'F->C', 'G->D', 'H->F']
+Run Time: 0.029918193817138672
+['A->C', 'B->D', 'C->A', 'D->B', 'E->H', 'F->H', 'G->C', 'H->F']
+Run Time: 0.4301912784576416
+['A->H', 'B->F', 'C->E', 'D->F', 'E->C', 'F->D', 'G->E', 'H->D']
+Run Time: 0.14700913429260254
+['A->E', 'B->G', 'C->G', 'D->F', 'E->A', 'F->D', 'G->B', 'H->B']
+Run Time: 0.029885292053222656
+['A->H', 'B->G', 'C->G', 'D->H', 'E->D', 'F->C', 'G->C', 'H->A']
+Run Time: 0.13925433158874512
+['A->E', 'B->G', 'C->E', 'D->F', 'E->A', 'F->D', 'G->B', 'H->F']
+Run Time: 0.22442412376403809
+['A->G', 'B->E', 'C->E', 'D->F', 'E->B', 'F->D', 'G->B', 'H->G']
+Run Time: 0.11669301986694336
+['A->C', 'B->G', 'C->A', 'D->F', 'E->G', 'F->H', 'G->B', 'H->F']
+Run Time: 0.31136631965637207
+['A->D', 'B->F', 'C->D', 'D->C', 'E->A', 'F->B', 'G->H', 'H->G']
+Run Time: 0.2703220844268799
+['A->G', 'B->G', 'C->H', 'D->E', 'E->D', 'F->C', 'G->B', 'H->A']
+Run Time: 0.03391003608703613
+['A->F', 'B->C', 'C->B', 'D->H', 'E->G', 'F->A', 'G->E', 'H->D']
+Run Time: 0.019945859909057617
+['A->F', 'B->F', 'C->G', 'D->G', 'E->D', 'F->A', 'G->C', 'H->C']
+Run Time: 0.15957236289978027
+['A->F', 'B->D', 'C->H', 'D->B', 'E->F', 'F->A', 'G->B', 'H->C']
+Run Time: 0.03690457344055176
+['A->H', 'B->G', 'C->E', 'D->E', 'E->D', 'F->D', 'G->E', 'H->A']
+Run Time: 0.4208526611328125
+['A->E', 'B->A', 'C->G', 'D->H', 'E->F', 'F->E', 'G->C', 'H->D']
+Run Time: 0.25598573684692383
+['A->H', 'B->C', 'C->B', 'D->F', 'E->G', 'F->D', 'G->E', 'H->A']
+Run Time: 0.10935616493225098
+['A->B', 'B->D', 'C->F', 'D->B', 'E->F', 'F->E', 'G->H', 'H->G']
+Run Time: 0.46855902671813965
+['A->H', 'B->D', 'C->A', 'D->E', 'E->D', 'F->D', 'G->E', 'H->A']
+Run Time: 0.13810157775878906
+['A->D', 'B->D', 'C->G', 'D->B', 'E->G', 'F->E', 'G->E', 'H->B']
+Run Time: 0.09075713157653809
+['A->F', 'B->D', 'C->E', 'D->B', 'E->F', 'F->E', 'G->B', 'H->A']
+Run Time: 1.3552842140197754
+['A->H', 'B->E', 'C->E', 'D->E', 'E->C', 'F->C', 'G->A', 'H->A']
+Run Time: 0.244215726852417
+['A->G', 'B->A', 'C->H', 'D->G', 'E->A', 'F->G', 'G->A', 'H->C']
+Run Time: 0.5986447334289551
+['A->D', 'B->H', 'C->F', 'D->A', 'E->G', 'F->C', 'G->B', 'H->B']
+Run Time: 0.18395376205444336
+['A->E', 'B->A', 'C->F', 'D->E', 'E->A', 'F->H', 'G->D', 'H->F']
+Run Time: 0.17495989799499512
+['A->F', 'B->F', 'C->G', 'D->F', 'E->B', 'F->B', 'G->C', 'H->B']
+Run Time: 0.27715635299682617
+['A->F', 'B->E', 'C->G', 'D->E', 'E->B', 'F->A', 'G->C', 'H->E']
+Run Time: 0.09373140335083008
+['A->E', 'B->G', 'C->H', 'D->B', 'E->A', 'F->G', 'G->F', 'H->C']
+Run Time: 0.07810139656066895
+['A->F', 'B->H', 'C->D', 'D->F', 'E->D', 'F->D', 'G->B', 'H->B']
+Run Time: 0.2538485527038574
+['A->H', 'B->F', 'C->F', 'D->E', 'E->C', 'F->B', 'G->B', 'H->F']
+Run Time: 2.2611443996429443
+['A->G', 'B->E', 'C->E', 'D->C', 'E->B', 'F->H', 'G->A', 'H->F']
+Run Time: 0.1575455665588379
+['A->H', 'B->E', 'C->D', 'D->C', 'E->B', 'F->E', 'G->D', 'H->A']
+Run Time: 0.09973263740539551
+['A->B', 'B->A', 'C->D', 'D->C', 'E->G', 'F->A', 'G->E', 'H->D']
+Run Time: 0.0010287761688232422
+['A->G', 'B->D', 'C->H', 'D->A', 'E->C', 'F->H', 'G->A', 'H->C']
+Run Time: 0.0857396125793457
+['A->H', 'B->E', 'C->H', 'D->E', 'E->D', 'F->G', 'G->F', 'H->C']
+Run Time: 0.10077238082885742
+['A->E', 'B->C', 'C->B', 'D->H', 'E->A', 'F->E', 'G->C', 'H->D']
+Run Time: 1.0274827480316162
+['A->H', 'B->D', 'C->G', 'D->B', 'E->C', 'F->A', 'G->H', 'H->G']
+Run Time: 0.07180500030517578
+['A->G', 'B->G', 'C->D', 'D->C', 'E->B', 'F->H', 'G->B', 'H->F']
+Run Time: 0.029703617095947266
+['A->D', 'B->E', 'C->H', 'D->A', 'E->B', 'F->G', 'G->B', 'H->C']
+Run Time: 0.3590569496154785
+['A->B', 'B->A', 'C->B', 'D->G', 'E->G', 'F->H', 'G->E', 'H->F']
+Run Time: 0.3936882019042969
+['A->E', 'B->H', 'C->G', 'D->F', 'E->A', 'F->D', 'G->E', 'H->B']
+Run Time: 0.2903470993041992
+['A->F', 'B->E', 'C->E', 'D->E', 'E->B', 'F->A', 'G->B', 'H->G']
+Run Time: 0.05689239501953125
+['A->H', 'B->E', 'C->H', 'D->F', 'E->B', 'F->D', 'G->B', 'H->C']
+Run Time: 0.012999773025512695
+['A->C', 'B->E', 'C->A', 'D->E', 'E->D', 'F->G', 'G->H', 'H->G']
+Run Time: 0.08676719665527344
+['A->E', 'B->D', 'C->H', 'D->B', 'E->A', 'F->C', 'G->A', 'H->C']
+Run Time: 0.05684161186218262
+['A->G', 'B->D', 'C->E', 'D->H', 'E->A', 'F->H', 'G->A', 'H->D']
+Run Time: 0.028927087783813477
+['A->B', 'B->A', 'C->G', 'D->G', 'E->A', 'F->H', 'G->D', 'H->F']
+Run Time: 0.16755318641662598
+['A->B', 'B->C', 'C->B', 'D->G', 'E->F', 'F->G', 'G->D', 'H->D']
+Run Time: 0.1077113151550293
+['A->C', 'B->C', 'C->A', 'D->B', 'E->D', 'F->B', 'G->H', 'H->G']
+Run Time: 0.04384970664978027
+['A->G', 'B->E', 'C->H', 'D->H', 'E->B', 'F->E', 'G->B', 'H->D']
+Run Time: 0.0818166732788086
+['A->G', 'B->D', 'C->F', 'D->F', 'E->H', 'F->D', 'G->A', 'H->C']
+Run Time: 0.05485200881958008
+['A->E', 'B->F', 'C->F', 'D->G', 'E->A', 'F->B', 'G->D', 'H->D']
+Run Time: 0.08078241348266602
+['A->B', 'B->A', 'C->A', 'D->H', 'E->H', 'F->D', 'G->H', 'H->E']
+Run Time: 0.17150640487670898
+['A->F', 'B->E', 'C->A', 'D->A', 'E->H', 'F->A', 'G->H', 'H->E']
+Run Time: 0.3660550117492676
+['A->C', 'B->F', 'C->B', 'D->F', 'E->B', 'F->D', 'G->H', 'H->G']
+Run Time: 0.17453598976135254
+['A->C', 'B->H', 'C->A', 'D->E', 'E->D', 'F->G', 'G->F', 'H->C']
+Run Time: 0.05385398864746094
+['A->C', 'B->F', 'C->A', 'D->H', 'E->D', 'F->B', 'G->H', 'H->D']
+Run Time: 0.08844256401062012
+['A->D', 'B->H', 'C->A', 'D->A', 'E->B', 'F->D', 'G->H', 'H->B']
+Run Time: 0.04686260223388672
+['A->D', 'B->H', 'C->G', 'D->E', 'E->D', 'F->B', 'G->C', 'H->B']
+Run Time: 0.0
+['A->F', 'B->G', 'C->B', 'D->C', 'E->F', 'F->E', 'G->H', 'H->G']
+Run Time: 0.1405947208404541
+['A->E', 'B->H', 'C->E', 'D->H', 'E->A', 'F->G', 'G->F', 'H->B']
+Run Time: 0.031241178512573242
+['A->G', 'B->E', 'C->D', 'D->E', 'E->D', 'F->A', 'G->A', 'H->G']
+Run Time: 0.2726306915283203
+['A->E', 'B->F', 'C->G', 'D->G', 'E->A', 'F->B', 'G->C', 'H->E']
+Run Time: 0.09178781509399414
+['A->C', 'B->G', 'C->A', 'D->H', 'E->B', 'F->G', 'G->F', 'H->D']
+Run Time: 0.10415768623352051
+['A->G', 'B->H', 'C->B', 'D->B', 'E->C', 'F->B', 'G->A', 'H->B']
+Run Time: 0.3892483711242676
+['A->G', 'B->C', 'C->B', 'D->A', 'E->F', 'F->E', 'G->A', 'H->E']
+Run Time: 0.1137235164642334
+['A->E', 'B->F', 'C->D', 'D->C', 'E->A', 'F->G', 'G->F', 'H->A']
+Run Time: 0.09674787521362305
+['A->G', 'B->E', 'C->F', 'D->A', 'E->H', 'F->C', 'G->B', 'H->E']
+Run Time: 0.1516861915588379
+['A->H', 'B->C', 'C->H', 'D->F', 'E->B', 'F->D', 'G->H', 'H->G']
+Run Time: 0.5988650321960449
+['A->H', 'B->E', 'C->F', 'D->G', 'E->B', 'F->C', 'G->D', 'H->A']
+Run Time: 0.11906838417053223
+['A->C', 'B->C', 'C->A', 'D->G', 'E->D', 'F->H', 'G->D', 'H->F']
+Run Time: 0.0189511775970459
+['A->E', 'B->H', 'C->E', 'D->H', 'E->A', 'F->G', 'G->F', 'H->D']
+Run Time: 0.03191328048706055
+['A->E', 'B->D', 'C->F', 'D->B', 'E->A', 'F->C', 'G->E', 'H->E']
+Run Time: 0.16829848289489746
+['A->B', 'B->A', 'C->D', 'D->C', 'E->B', 'F->G', 'G->H', 'H->G']
+Run Time: 0.009975194931030273
+['A->H', 'B->D', 'C->H', 'D->B', 'E->D', 'F->H', 'G->F', 'H->C']
+Run Time: 0.24606657028198242
+['A->C', 'B->H', 'C->G', 'D->F', 'E->D', 'F->D', 'G->C', 'H->B']
+Run Time: 0.28701019287109375
+['A->G', 'B->F', 'C->D', 'D->H', 'E->G', 'F->B', 'G->H', 'H->G']
+Run Time: 0.6195521354675293
+['A->B', 'B->A', 'C->F', 'D->A', 'E->B', 'F->G', 'G->F', 'H->G']
+Run Time: 0.01566147804260254
+['A->G', 'B->F', 'C->G', 'D->H', 'E->H', 'F->B', 'G->C', 'H->D']
+Run Time: 0.2657756805419922
+['A->C', 'B->G', 'C->A', 'D->C', 'E->G', 'F->D', 'G->E', 'H->B']
+Run Time: 0.12496399879455566
+['A->B', 'B->A', 'C->D', 'D->C', 'E->D', 'F->B', 'G->C', 'H->D']
+Run Time: 0.03124260902404785
+['A->H', 'B->C', 'C->D', 'D->C', 'E->H', 'F->H', 'G->A', 'H->F']
+Run Time: 0.37761998176574707
+['A->E', 'B->F', 'C->H', 'D->F', 'E->A', 'F->D', 'G->H', 'H->G']
+Run Time: 0.17353439331054688
+['A->C', 'B->H', 'C->A', 'D->C', 'E->C', 'F->A', 'G->F', 'H->B']
+Run Time: 0.0432734489440918
+['A->D', 'B->H', 'C->H', 'D->A', 'E->F', 'F->E', 'G->H', 'H->B']
+Run Time: 0.20682215690612793
+['A->B', 'B->A', 'C->E', 'D->F', 'E->F', 'F->D', 'G->D', 'H->B']
+Run Time: 0.13310813903808594
+['A->C', 'B->F', 'C->A', 'D->E', 'E->D', 'F->G', 'G->F', 'H->G']
+Run Time: 0.0624845027923584
+['A->B', 'B->A', 'C->F', 'D->H', 'E->G', 'F->C', 'G->E', 'H->D']
+Run Time: 0.14059233665466309
+['A->C', 'B->F', 'C->A', 'D->H', 'E->D', 'F->D', 'G->E', 'H->D']
+Run Time: 0.16437411308288574
+['A->E', 'B->F', 'C->G', 'D->F', 'E->A', 'F->D', 'G->C', 'H->A']
+Run Time: 0.17372918128967285
+['A->C', 'B->F', 'C->A', 'D->C', 'E->H', 'F->B', 'G->D', 'H->E']
+Run Time: 0.001995086669921875
+['A->C', 'B->A', 'C->D', 'D->G', 'E->G', 'F->A', 'G->D', 'H->E']
+Run Time: 0.46776390075683594
+['A->B', 'B->A', 'C->H', 'D->H', 'E->F', 'F->G', 'G->F', 'H->D']
+Run Time: 0.13762235641479492
+['A->E', 'B->D', 'C->F', 'D->B', 'E->A', 'F->C', 'G->D', 'H->E']
+Run Time: 0.27227020263671875
+['A->D', 'B->F', 'C->H', 'D->G', 'E->F', 'F->E', 'G->D', 'H->C']
+Run Time: 0.15156078338623047
+['A->B', 'B->A', 'C->F', 'D->A', 'E->G', 'F->C', 'G->C', 'H->G']
+Run Time: 2.3895657062530518
+['A->D', 'B->F', 'C->A', 'D->A', 'E->A', 'F->D', 'G->C', 'H->F']
+Run Time: 0.6489293575286865
+['A->H', 'B->E', 'C->G', 'D->G', 'E->G', 'F->B', 'G->E', 'H->A']
+Run Time: 0.3373134136199951
+['A->E', 'B->C', 'C->B', 'D->C', 'E->A', 'F->E', 'G->H', 'H->E']
+Run Time: 0.12067604064941406
+['A->D', 'B->H', 'C->E', 'D->H', 'E->C', 'F->G', 'G->H', 'H->D']
+Run Time: 0.5505664348602295
+mismatch at: 3
+Deep Web:(A->E->H->F->D->B->G->C->A): 1272
+Deep Web Window:(A->C->G->B->D->F->H->E->A): 1272
+mismatch at: 6
+Deep Web:(A->H->E->G->B->C->F->D->A): 805
+Deep Web Window:(A->D->F->C->B->G->E->H->A): 805
+mismatch at: 14
+Deep Web:(A->B->D->G->C->H->E->F->A): 1078
+Deep Web Window:(A->F->B->D->C->H->G->E->A): 1133
+mismatch at: 15
+Deep Web:(A->H->C->E->D->F->G->B->A): 1095
+Deep Web Window:(A->B->G->F->D->E->C->H->A): 1095
+mismatch at: 16
+Deep Web:(A->B->D->H->C->G->E->F->A): 1195
+Deep Web Window:(A->F->E->G->C->H->D->B->A): 1195
+mismatch at: 17
+Deep Web:(A->H->B->C->E->G->F->D->A): 1961
+Deep Web Window:(A->D->F->G->E->C->B->H->A): 1961
+mismatch at: 19
+Deep Web:(A->H->B->G->E->D->F->C->A): 547
+Deep Web Window:(A->F->D->E->G->B->C->H->A): 584
+mismatch at: 20
+Deep Web:(A->H->B->D->E->F->G->C->A): 580
+Deep Web Window:(A->G->E->F->C->D->B->H->A): 566
+mismatch at: 22
+Deep Web:(A->H->F->B->C->E->D->G->A): 1153
+Deep Web Window:(A->G->C->D->E->B->F->H->A): 1057
+mismatch at: 23
+Deep Web:(A->G->B->D->H->C->F->E->A): 1045
+Deep Web Window:(A->B->D->H->C->F->E->G->A): 929
+mismatch at: 24
+Deep Web:(A->D->F->C->H->B->E->G->A): 958
+Deep Web Window:(A->D->F->C->G->H->B->E->A): 1015
+mismatch at: 26
+Deep Web:(A->D->C->G->H->B->E->F->A): 1199
+Deep Web Window:(A->F->E->B->D->H->G->C->A): 1213
+mismatch at: 27
+Deep Web:(A->H->E->B->D->C->G->F->A): 843
+Deep Web Window:(A->F->G->C->D->B->E->H->A): 843
+mismatch at: 29
+Deep Web:(A->F->D->E->C->B->H->G->A): 1037
+Deep Web Window:(A->G->H->B->F->D->C->E->A): 1032
+mismatch at: 31
+Deep Web:(A->E->B->H->F->C->D->G->A): 1353
+Deep Web Window:(A->G->D->C->F->H->B->E->A): 1354
+mismatch at: 35
+Deep Web:(A->B->E->D->G->F->C->H->A): 1108
+Deep Web Window:(A->H->C->F->G->D->E->B->A): 1108
+mismatch at: 36
+Deep Web:(A->G->C->B->D->H->F->E->A): 1195
+Deep Web Window:(A->E->F->H->D->B->C->G->A): 1195
+mismatch at: 38
+Deep Web:(A->G->B->E->D->C->F->H->A): 929
+Deep Web Window:(A->G->B->E->C->D->F->H->A): 905
+mismatch at: 39
+Deep Web:(A->G->F->B->E->H->C->D->A): 763
+Deep Web Window:(A->D->C->H->E->B->F->G->A): 763
+mismatch at: 42
+Deep Web:(A->F->H->G->B->E->D->C->A): 773
+Deep Web Window:(A->C->D->E->B->G->H->F->A): 974
+mismatch at: 45
+Deep Web:(A->B->D->H->C->F->G->E->A): 1322
+Deep Web Window:(A->E->G->F->C->H->D->B->A): 1322
+mismatch at: 46
+Deep Web:(A->E->C->B->D->H->F->G->A): 502
+Deep Web Window:(A->G->F->H->D->B->C->E->A): 502
+mismatch at: 47
+Deep Web:(A->E->F->H->D->G->C->B->A): 1088
+Deep Web Window:(A->B->C->G->D->H->F->E->A): 1088
+mismatch at: 48
+Deep Web:(A->B->C->H->D->G->E->F->A): 623
+Deep Web Window:(A->F->E->G->D->H->C->B->A): 628
+mismatch at: 50
+Deep Web:(A->G->B->E->F->D->C->H->A): 561
+Deep Web Window:(A->H->C->D->F->E->B->G->A): 566
+mismatch at: 51
+Deep Web:(A->G->B->D->F->C->H->E->A): 542
+Deep Web Window:(A->E->C->F->H->D->B->G->A): 677
+mismatch at: 53
+Deep Web:(A->B->E->H->G->D->F->C->A): 1007
+Deep Web Window:(A->C->F->D->G->H->E->B->A): 1007
+mismatch at: 59
+Deep Web:(A->D->E->G->C->H->B->F->A): 445
+Deep Web Window:(A->F->B->H->C->G->E->D->A): 445
+mismatch at: 60
+Deep Web:(A->F->D->C->B->G->H->E->A): 624
+Deep Web Window:(A->F->D->C->H->G->B->E->A): 831
+mismatch at: 62
+Deep Web:(A->G->H->C->B->E->D->F->A): 880
+Deep Web Window:(A->G->H->C->D->B->E->F->A): 877
+mismatch at: 64
+Deep Web:(A->B->E->G->F->H->D->C->A): 1065
+Deep Web Window:(A->C->D->H->F->G->E->B->A): 1065
+mismatch at: 66
+Deep Web:(A->G->B->C->F->E->H->D->A): 1518
+Deep Web Window:(A->D->H->E->F->C->B->G->A): 1518
+mismatch at: 67
+Deep Web:(A->H->D->C->G->F->B->E->A): 910
+Deep Web Window:(A->E->B->F->G->C->D->H->A): 910
+mismatch at: 68
+Deep Web:(A->G->B->E->F->C->H->D->A): 819
+Deep Web Window:(A->D->H->C->F->E->B->G->A): 819
+mismatch at: 69
+Deep Web:(A->C->E->B->F->D->G->H->A): 707
+Deep Web Window:(A->H->G->D->F->B->E->C->A): 707
+mismatch at: 74
+Deep Web:(A->B->E->C->D->F->G->H->A): 398
+Deep Web Window:(A->H->G->F->D->C->E->B->A): 398
+mismatch at: 75
+Deep Web:(A->C->H->F->E->B->D->G->A): 549
+Deep Web Window:(A->H->C->F->E->B->D->G->A): 558
+mismatch at: 76
+Deep Web:(A->B->H->F->D->E->G->C->A): 951
+Deep Web Window:(A->C->G->E->F->D->H->B->A): 1017
+mismatch at: 78
+Deep Web:(A->D->C->F->G->H->E->B->A): 445
+Deep Web Window:(A->B->E->H->G->F->C->D->A): 445
+mismatch at: 80
+Deep Web:(A->C->D->F->E->G->B->H->A): 968
+Deep Web Window:(A->H->B->G->E->F->D->C->A): 968
+mismatch at: 81
+Deep Web:(A->B->F->E->H->D->C->G->A): 701
+Deep Web Window:(A->G->C->D->H->E->F->B->A): 701
+mismatch at: 82
+Deep Web:(A->H->F->C->D->B->E->G->A): 1049
+Deep Web Window:(A->G->B->D->C->E->F->H->A): 1026
+mismatch at: 83
+Deep Web:(A->E->C->H->G->F->D->B->A): 1254
+Deep Web Window:(A->B->D->F->G->H->C->E->A): 1254
+mismatch at: 84
+Deep Web:(A->C->E->D->H->B->G->F->A): 541
+Deep Web Window:(A->E->D->H->B->G->F->C->A): 926
+mismatch at: 86
+Deep Web:(A->H->C->E->F->D->G->B->A): 1028
+Deep Web Window:(A->B->G->D->F->E->C->H->A): 1028
+mismatch at: 87
+Deep Web:(A->E->D->H->G->F->B->C->A): 845
+Deep Web Window:(A->D->E->C->H->G->F->B->A): 795
+mismatch at: 88
+Deep Web:(A->E->G->D->H->F->C->B->A): 1411
+Deep Web Window:(A->B->C->F->H->D->G->E->A): 1411
+mismatch at: 89
+Deep Web:(A->D->H->G->E->F->B->C->A): 686
+Deep Web Window:(A->C->B->F->E->G->H->D->A): 686
+mismatch at: 93
+Deep Web:(A->B->G->F->E->C->D->H->A): 1158
+Deep Web Window:(A->H->D->C->E->F->G->B->A): 1158
+mismatch at: 95
+Deep Web:(A->H->C->E->F->B->G->D->A): 1079
+Deep Web Window:(A->G->D->E->F->B->C->H->A): 1021
+mismatch at: 96
+Deep Web:(A->F->C->G->E->H->D->B->A): 816
+Deep Web Window:(A->B->D->H->E->G->C->F->A): 816
+mismatch at: 97
+Deep Web:(A->C->G->B->F->H->E->D->A): 693
+Deep Web Window:(A->D->C->G->B->F->H->E->A): 668
+mismatch at: 98
+Deep Web:(A->F->B->E->G->D->C->H->A): 974
+Deep Web Window:(A->H->C->D->G->E->B->F->A): 974
+mismatch at: 99
+Deep Web:(A->E->F->B->C->D->G->H->A): 743
+Deep Web Window:(A->F->B->C->D->G->H->E->A): 716
+mismatch at: 100
+Deep Web:(A->F->G->B->H->D->E->C->A): 768
+Deep Web Window:(A->C->E->D->H->B->G->F->A): 768
+=================
+Trials Complete.

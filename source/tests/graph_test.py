@@ -50,6 +50,15 @@ class Graph_test(unittest.TestCase):
         self.assertEqual(GraphStringMuxer.translate('A'), 0)
         self.assertEqual(GraphStringMuxer.translate('C'), 2)
     
+    def test_a_graph_can_compare_solution_equality(self):
+        V = self.V
+        graphA = Graph(['A->B', 'B->D', 'C->B', 'D->A'], V)
+        graphB = Graph(['A->B', 'B->D', 'C->B', 'D->A'], V)
+        graphC = Graph(['A->B', 'B->C', 'C->D', 'D->A'], V)
+        self.assertTrue(graphA.sharesSameSolution(graphB))
+        self.assertTrue(graphB.sharesSameSolution(graphA))
+        self.assertFalse(graphA.sharesSameSolution(graphC))
+    
     def test_a_graph_can_go_deeper(self):
         V = self.V
         graph = Graph(['A->B', 'B->D', 'C->B', 'D->A'], V)

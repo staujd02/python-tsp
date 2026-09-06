@@ -1,14 +1,28 @@
 from math import ceil, sqrt
 from random import random
 from uuid import uuid4
+import string
 
 class MatrixBuilder(object):
+
+    @staticmethod
+    def getUniqueLabels(size):
+        labels = []
+        alphabet = list(string.ascii_uppercase)
+        lastIndex = len(alphabet)
+        for (idx, value) in enumerate(range(1, size + 1)):
+            if value <= lastIndex:
+                labels.append(alphabet[idx])
+            else:
+                labels.append(alphabet[idx % lastIndex] + str(idx // lastIndex))
+        return labels
     
     @staticmethod
     def populateEuclideanMatrix(matrix, size):
         points = []
+        labels = MatrixBuilder.getUniqueLabels(size)
         for i in range(size):
-            points.append([MatrixBuilder.getRand(0, 1000), MatrixBuilder.getRand(0, 1000), uuid4()])
+            points.append([MatrixBuilder.getRand(0, 1000), MatrixBuilder.getRand(0, 1000), labels[i]])
         return MatrixBuilder.populateEuclideanMatrixFromPoints(matrix, points) 
     
     @staticmethod

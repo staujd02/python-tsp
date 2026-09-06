@@ -19,9 +19,7 @@ class TestGenerator(object):
     def createTest(self, matrix, points, exclusionGenerator):
         exclusionList = exclusionGenerator(points)
         (zeroGraph, vectorList) = Transformer(matrix, self.getHeaders(len(points)), exclusionList).fetchSolvePieces()
-        (vList, runTime) = Timer.time("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList), True)
-        print(vList)
-        return runTime
+        return Timer.time("Run Time: ", lambda: Solver().solve(zeroGraph, vectorList), True)
     
     def runDeepWebCutTestWithWindows(self, matrix, points):
         return self.createTest(matrix, points, ExclusionGenerator.generateExclusionDictionaryDeepWebCutWithWindows)
@@ -94,12 +92,17 @@ class TestGenerator(object):
                 matrix = []
                 points = MatrixBuilder.populateEuclideanMatrix(matrix, x)
                 matrixesWithPoints.append([matrix, points])
-            # self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrixesWithPoints, x, self.runTest)
+            ySolutions = self.runTrialWithPrepopulatedMatrix("Trial With No Hull Elimination: ", matrixesWithPoints, x, self.runTest)
             # self.runTrialWithPrepopulatedMatrix("Trial With Outside Hull Elimination: ", matrixesWithPoints, x, self.runTestBasicExclusionTest)
             # self.runTrialWithPrepopulatedMatrix("Trial With Inner Rings Hull Elimination: ", matrixesWithPoints, x, self.runTestInnerRingsExclusionTest)
             # self.runTrialWithPrepopulatedMatrix("Trial With Deep Elimination: ", matrixesWithPoints, x, self.runDeepCutTest)
-            self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTest)
-            self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Window Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTestWithWindows)
+            xSolutions = self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTest)
+            # ySolutions = self.runTrialWithPrepopulatedMatrix("Trial With Deep Web Window Elimination: ", matrixesWithPoints, x, self.runDeepWebCutTestWithWindows)
+            for (idx, val) in enumerate(xSolutions):
+                if not val.sharesSameSolution(ySolutions[idx]):
+                    print("mismatch at: " + str(idx + 1))
+                    print("Deep Web:" + str(val))
+                    print("Deep Web Window:" + str(ySolutions[idx]))
         print("=================")
         print("Trials Complete.")
 
@@ -108,9 +111,13 @@ class TestGenerator(object):
         print(title + str(size))
         print("=================")
         trials = []
+        solutions = []
         for [matrix, points] in matrixesWithPoints:
-            trials.append(test(matrix, points))
-        self.printStats(trials)
+            (vList, runtime) = test(matrix, points)
+            trials.append(runtime)
+            solutions.append(vList)
+        # self.printStats(trials)
+        return solutions
         
     def printStats(self, trials):
         mean = statistics.mean(trials)

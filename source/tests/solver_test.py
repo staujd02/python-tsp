@@ -78,6 +78,9 @@ class Solver_test(unittest.TestCase):
             [75,  175,  150,  None,  80],
             [50,  200,  125,   80,  None]
         ]
-        self.test = list(map(lambda t: list(map(lambda r: None if r == None else [r, 'Ignore'], t)), self.test))
+        self.test = [
+            [None if r is None else [r, self.headers[rowIdx], self.headers[colIdx]] for (colIdx, r) in enumerate(row)]
+            for (rowIdx, row) in enumerate(self.test)
+        ]
         self.transformer = Transformer(self.test, self.headers, {'Ignore': []})
         self.solver = Solver()

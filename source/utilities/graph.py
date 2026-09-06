@@ -85,11 +85,16 @@ class Graph(NoOpCompare):
             s += str(self.vectorList[v])
         return s + "}"
 
+
     def __assignVector(self, vector):
         i = GraphStringMuxer.translate(vector[0])
         self.graphData[i] = self.toKey(vector)
+    
 
     def __str__(self):
+        return self.getVectorPath() + ": " + str(self.weight)
+
+    def getVectorPath(self):
         visited = {}
         start = self.graphData[0][0]
         literal = "(" + start
@@ -101,7 +106,10 @@ class Graph(NoOpCompare):
             i = GraphStringMuxer.translate(start)
             start = self.destintationAt(i)
             literal += start
-        return literal + "): " + str(self.weight)
+        return literal + ")"
+    
+    def sharesSameSolution(self, graph):
+        return self.getVectorPath() == graph.getVectorPath()
 
     def __unicode__(self):
         return u"" + self.__str__()

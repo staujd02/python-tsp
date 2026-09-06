@@ -57,10 +57,10 @@ class ExclusionGenerator(object):
                for interiorHullList in listOfHullsLists[hdx+1:]:
                     interiorHull = deepcopy(interiorHullList)
                     ExclusionGenerator.runExclusionsOnPointList(exclusions, [pt] + interiorHull)
-                    [left, right] = ExclusionGenerator.getLeftRightOfIdx(hullList, idx) 
-                    ExclusionGenerator.runExclusionsOnPointList(exclusions, [pt, right]  + interiorHull)
-                    ExclusionGenerator.runExclusionsOnPointList(exclusions, [pt, left]  + interiorHull)
-                    ExclusionGenerator.runExclusionsOnPointList(exclusions, [pt, left, right]  + interiorHull)
+                    # [left, right] = ExclusionGenerator.getLeftRightOfIdx(hullList, idx) 
+                    # ExclusionGenerator.runExclusionsOnPointList(exclusions, [pt, left, right]  + interiorHull)
+                    # ExclusionGenerator.runExclusionsOnPointList(exclusions, [pt, left]  + interiorHull)
+                    # ExclusionGenerator.runExclusionsOnPointList(exclusions, [pt, right]  + interiorHull)
        return exclusions
    
    @staticmethod
