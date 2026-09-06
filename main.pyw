@@ -1,112 +1,59 @@
-from copy import deepcopy
-from random import seed
-from uuid import uuid4
+"""Hull Cut Workbench -- the front end for this TSP research code.
 
-from source.utilities.transformer import Transformer
-from source.utilities.test_generator import TestGenerator
-from source.utilities.graham_scan import GrahamScan
-from source.utilities.exclusion_generator import ExclusionGenerator
-from source.utilities.matrix_builder import MatrixBuilder
+Double-click this file (Windows runs .pyw without a console) or run it with any
+Python 3.7+. It starts a local server and opens the workbench in your browser.
 
-# size = 5
-# headers = []
-# matrix = []
-# points = MatrixBuilder.populateEuclideanMatrix(matrix, size)
-# print(matrix)
+    python main.pyw                  open the workbench
+    python main.pyw --no-browser     start the server only
+    python main.pyw --port 9000      pin the port
+    python main.pyw --verbose        log requests to the console
 
-# thing to beat O(1.9^{n})
+The original exploratory script is kept as research.py.
+"""
 
-# Found Issue..?
-# Weights are different but the solution is the same?
-# ... maybe the zero graph is different
-# seed(2153649) => 2 Trial in 10 Suite
+import argparse
+import os
+import sys
+import threading
+import webbrowser
 
-seed(2553649)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# testGen.runVerificationSuite([7, 8, 9, 10], 5)
-
-testGen = TestGenerator()
-testGen.runVerificationSuite([12], 1)
-# testGen.runVerificationSuite([9, 10], 10)
-# testGen.runVerificationSuite([8], 100)
-
-# testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
-# testGen.runIterationTest(5, 10)
-# for i in range(5):
-#     seed(i)
-#     print("Graph:")
-#     testGen.runTest(15)
-#     seed(i)
-#     print("Classical:")
-#     testGen.runClassicalTest(15)
-#     print("")
+from source.webapp.server import find_free_port, serve  # noqa: E402
 
 
-# points = [
-#     [2,10,'A'],
-#     [7,11,'B'],
-#     [10,10,'C'],
-#     [9,7,'D'],
-#     [10,2,'E'],
-#     [5,8,'F'],
-#     [7,4,'G'],
-#     [3,4,'H'],
-# ]
-# matrix = []
-# points = MatrixBuilder.populateEuclideanMatrixFromPoints(matrix, points)
-# exclusion = ExclusionGenerator.generateExclusionDictionaryDeepWebCutWithWindows(deepcopy(points))
-# print(exclusion)
-# testGen.runTrialWithPrepopulatedMatrix("Test Run - Size: ", [[matrix, points]], 8, testGen.runDeepWebCutTestWithWindows)
-# myList = ['dog', 'cat', 'bird', 'cow']
-# hullList = ['dog', 'cow']
-# myList = list(filter(lambda x: x in hullList, myList))
-# print(myList)
-# A =  (908, 31)
-# B = (968, 369)
-# C = (24, 470)
-# D = (16, 304)
-# E = (620, 498)
-# F = (703, 542)
-# G = (901, 14)
-# H = (662, 403)
-# I = (556, 440)
- 
- 
-# A->G->H->I->D->C->E->F->B->A
+def parse_arguments(argv):
+    parser = argparse.ArgumentParser(
+        prog="main.pyw", description="Run the Hull Cut Workbench."
+    )
+    parser.add_argument("--port", type=int, default=8731, help="preferred port (default 8731)")
+    parser.add_argument("--host", default="127.0.0.1", help="interface to bind (default localhost)")
+    parser.add_argument("--no-browser", action="store_true", help="do not open a browser")
+    parser.add_argument("--verbose", action="store_true", help="log every request")
+    return parser.parse_args(argv)
 
-# # Bad Sol. 2
-#  908, 31 
-#  901, 14
-#  662, 403
-#  556, 440
-#  16, 304
-#  24, 470
-#  620, 498
-#  703, 542
-#  968, 369 
-#  908, 31 
 
-#  {
-#  'D': ['A', 'B', 'F', 'E'],
-#  'G': ['B', 'F', 'C', 'E'],
-#  'A': ['F', 'C', 'D', 'I', 'E'],
-#  'B': ['C', 'D', 'G', 'I', 'E'],
-#  'F': ['D', 'G', 'A', 'I', 'H'],
-#  'C': ['G', 'A', 'B', 'H'],
-#  'H': ['C', 'E', 'F'],
-#  'E': ['D', 'G', 'A', 'H', 'B'],
-#  'I': ['A', 'B', 'F']
-#  }
+def main(argv=None):
+    options = parse_arguments(argv if argv is not None else sys.argv[1:])
+    port = find_free_port(options.port, options.host)
+    server = serve(host=options.host, port=port, verbose=options.verbose)
+    address = "http://%s:%d/" % (options.host, port)
 
-#  # Right Sol. 1
-#  A->G->D->C->I->E->F->H->B->A
+    if not options.no_browser:
+        threading.Timer(0.4, webbrowser.open, args=(address,)).start()
 
-#  908, 31 
-#  901, 14
-#  16, 304
-#  24, 470
-#  556, 440
-#  620, 498
-#  703, 542
-#  662, 403
-#  968, 369 
+    if options.verbose or options.no_browser:
+        print("Hull Cut Workbench is running at " + address)
+        print("Press Ctrl+C to stop.")
+
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hull Cut Workbench</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead__identity">
+    <h1>Hull Cut Workbench</h1>
+    <p>Convex-hull edge elimination for the zero-graph tour solver</p>
+  </div>
+  <div class="masthead__status">
+    <span class="pill" id="status-pill" data-tone="idle">Ready</span>
+    <span class="clock mono" id="status-clock">&mdash;</span>
+  </div>
+</header>
+
+<main class="workbench">
+
+  <!-- ---------------- control rail ---------------- -->
+  <form class="rail" id="controls" autocomplete="off">
+
+    <section class="group">
+      <h2 class="eyebrow">Instance</h2>
+
+      <div class="segmented" role="radiogroup" aria-label="How cities are placed">
+        <label><input type="radio" name="mode" value="random" checked><span>Random</span></label>
+        <label><input type="radio" name="mode" value="custom"><span>Placed by hand</span></label>
+      </div>
+
+      <div data-mode-panel="random">
+        <div class="field">
+          <label for="size">Cities <output class="mono" id="size-readout">9</output></label>
+          <input type="range" id="size" name="size" min="3" max="14" step="1" value="9">
+          <p class="hint" id="size-hint"></p>
+        </div>
+
+        <div class="field">
+          <label for="seed">Seed</label>
+          <div class="row">
+            <input class="mono" type="number" id="seed" name="seed" value="2553649" min="0" step="1">
+            <button class="button button--quiet" type="button" id="reroll" title="New random seed">Reroll</button>
+          </div>
+        </div>
+      </div>
+
+      <div data-mode-panel="custom" hidden>
+        <p class="hint">Click the plot to drop a city. Click a city to remove it.
+          <span class="mono" id="custom-count">0</span> placed.</p>
+        <div class="row">
+          <button class="button button--quiet" type="button" id="clear-points">Clear all</button>
+          <button class="button button--quiet" type="button" id="seed-points">Start from random</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="group">
+      <h2 class="eyebrow">Elimination</h2>
+      <div class="strategies" id="strategies"></div>
+    </section>
+
+    <section class="group">
+      <h2 class="eyebrow">Run</h2>
+      <div class="field">
+        <label for="time-limit">Time limit <output class="mono" id="limit-readout">120s</output></label>
+        <input type="range" id="time-limit" min="10" max="600" step="10" value="120">
+      </div>
+      <label class="check">
+        <input type="checkbox" id="cross-check" checked>
+        <span>Cross-check the answer independently</span>
+      </label>
+      <div class="actions">
+        <button class="button button--primary" type="submit" id="run">Solve</button>
+        <button class="button" type="button" id="cancel" disabled>Cancel</button>
+      </div>
+      <p class="hint" id="run-hint"></p>
+    </section>
+
+    <section class="group">
+      <h2 class="eyebrow">Plot layers</h2>
+      <label class="check"><input type="checkbox" id="layer-hulls" checked><span>Hull rings</span></label>
+      <label class="check"><input type="checkbox" id="layer-cuts" checked><span>Eliminated edges</span></label>
+      <label class="check"><input type="checkbox" id="layer-check"><span>Cross-check tour</span></label>
+      <label class="check"><input type="checkbox" id="layer-labels" checked><span>City labels</span></label>
+    </section>
+  </form>
+
+  <!-- ---------------- results ---------------- -->
+  <div class="stage">
+    <nav class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-plot" aria-selected="true" aria-controls="panel-plot">Plot</button>
+      <button class="tab" role="tab" id="tab-suite" aria-selected="false" aria-controls="panel-suite">Benchmark suite</button>
+    </nav>
+
+    <section class="panel" id="panel-plot" role="tabpanel" aria-labelledby="tab-plot">
+      <figure class="plot">
+        <svg id="plot" viewBox="-70 -70 1140 1140" role="img" aria-label="Tour plot">
+          <g id="layer-grid"></g>
+          <g id="layer-cut-edges"></g>
+          <g id="layer-hull-rings"></g>
+          <g id="layer-check-tour"></g>
+          <g id="layer-tour"></g>
+          <g id="layer-cities"></g>
+        </svg>
+        <figcaption class="legend" id="legend"></figcaption>
+        <div class="plot__veil" id="plot-veil" hidden>
+          <div class="spinner" aria-hidden="true"></div>
+          <p class="mono" id="veil-text">Searching</p>
+        </div>
+      </figure>
+
+      <div class="readout">
+        <div class="metrics" id="metrics"></div>
+        <div class="tourline">
+          <h3 class="eyebrow">Tour</h3>
+          <p class="mono tourline__path" id="tour-path">Run a solve to draw a tour.</p>
+        </div>
+        <div class="verdict" id="verdict" hidden></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-suite" role="tabpanel" aria-labelledby="tab-suite" hidden>
+      <form class="suite-controls" id="suite-form">
+        <div class="field">
+          <span class="eyebrow">City counts</span>
+          <div class="chips" id="suite-sizes"></div>
+        </div>
+        <div class="field">
+          <span class="eyebrow">Strategies to compare</span>
+          <div class="chips" id="suite-strategies"></div>
+        </div>
+        <div class="suite-controls__run">
+          <div class="field">
+            <label for="suite-trials">Trials each</label>
+            <input class="mono" type="number" id="suite-trials" value="3" min="1" max="50">
+          </div>
+          <div class="field">
+            <label for="suite-seed">Base seed</label>
+            <input class="mono" type="number" id="suite-seed" value="2553649" min="0">
+          </div>
+          <div class="actions">
+            <button class="button button--primary" type="submit" id="suite-run">Run suite</button>
+            <button class="button" type="button" id="suite-cancel" disabled>Cancel</button>
+          </div>
+        </div>
+        <p class="hint">Every strategy meets the same instances, so the times compare directly.
+          Budget for it: an uncut 12-city solve took about four minutes on this machine.</p>
+      </form>
+
+      <div class="progress" id="suite-progress" hidden>
+        <div class="progress__bar"><span id="suite-bar"></span></div>
+        <p class="mono" id="suite-message"></p>
+      </div>
+
+      <div id="suite-results" class="suite-results" hidden>
+        <div class="chart" id="suite-chart"></div>
+        <div class="table-scroll">
+          <table class="table" id="suite-table"></table>
+        </div>
+      </div>
+
+      <p class="empty" id="suite-empty">No suite has been run yet. Pick city counts and strategies above.</p>
+    </section>
+  </div>
+</main>
+
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
