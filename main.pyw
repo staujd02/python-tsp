@@ -5,7 +5,7 @@ from uuid import uuid4
 from source.utilities.transformer import Transformer
 from source.utilities.test_generator import TestGenerator
 from source.utilities.graham_scan import GrahamScan
-from source.utilities.exclusion_generator import ExclusionGenerator 
+from source.utilities.exclusion_generator import ExclusionGenerator
 from source.utilities.matrix_builder import MatrixBuilder
 
 # size = 5
@@ -26,14 +26,9 @@ seed(2553649)
 # testGen.runVerificationSuite([7, 8, 9, 10], 5)
 
 testGen = TestGenerator()
+testGen.runVerificationSuite([12], 1)
 # testGen.runVerificationSuite([9, 10], 10)
-testGen.runVerificationSuite([8], 100)
-
-# ['A->C', 'B->D', 'C->A', 'D->B', 'E->H', 'F->H', 'G->C', 'H->F']
-# ['A->C', 'B->D', 'C->A', 'D->B', 'E->H', 'F->H', 'G->C', 'H->F']
-
-# Deep Web       :(A->E->H->F->D->B->G->C->A): 1272
-# Deep Web Window:(A->C->G->B->D->F->H->E->A): 1272
+# testGen.runVerificationSuite([8], 100)
 
 # testGen.runSuite([4, 5, 6, 7, 8, 9], 15)
 # testGen.runIterationTest(5, 10)
